@@ -33,9 +33,3 @@ Flyntic Studio is a modular web application designed for managing, assembling, a
 
 ## License
 MIT License
-
----
-
-**Short Description:**
-
-Flyntic Studio is a modular ASP.NET Core web application for managing and calculating drone assemblies, offering an extensible platform for drone design and simulation.
