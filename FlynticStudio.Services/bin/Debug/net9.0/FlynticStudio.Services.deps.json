@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "FlynticStudio.Services/1.0.0": {
+        "dependencies": {
+          "FlynticStudio.Data": "1.0.0"
+        },
+        "runtime": {
+          "FlynticStudio.Services.dll": {}
+        }
+      },
+      "FlynticStudio.Data/1.0.0": {
+        "runtime": {
+          "FlynticStudio.Data.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "FlynticStudio.Services/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "FlynticStudio.Data/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

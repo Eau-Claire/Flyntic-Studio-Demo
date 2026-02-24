@@ -1,0 +1,28 @@
+﻿<Project>
+  <ItemGroup>
+    <StaticWebAssetEndpoint Include="_content/FlynticStudio.Web/css/site.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-9b3rGDpZvKVTYhcYlg9J0VXOM\u002Ba7sWpR1ztI6\u002Bh5A4c="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"25019"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u00229b3rGDpZvKVTYhcYlg9J0VXOM\u002Ba7sWpR1ztI6\u002Bh5A4c=\u0022"},{"Name":"Last-Modified","Value":"Sat, 14 Feb 2026 15:01:37 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/FlynticStudio.Web/css/site.dimk3vlw6r.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"dimk3vlw6r"},{"Name":"integrity","Value":"sha256-9b3rGDpZvKVTYhcYlg9J0VXOM\u002Ba7sWpR1ztI6\u002Bh5A4c="},{"Name":"label","Value":"_content/FlynticStudio.Web/css/site.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"25019"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u00229b3rGDpZvKVTYhcYlg9J0VXOM\u002Ba7sWpR1ztI6\u002Bh5A4c=\u0022"},{"Name":"Last-Modified","Value":"Sat, 14 Feb 2026 15:01:37 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/FlynticStudio.Web/js/drone-studio.a8sp2c0nyl.js">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\drone-studio.js'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"a8sp2c0nyl"},{"Name":"integrity","Value":"sha256-Kg1TMecYkzcv8v3zj2VBcsoNOyRLAY3A9\u002BYXEeekKNY="},{"Name":"label","Value":"_content/FlynticStudio.Web/js/drone-studio.js"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"90659"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022Kg1TMecYkzcv8v3zj2VBcsoNOyRLAY3A9\u002BYXEeekKNY=\u0022"},{"Name":"Last-Modified","Value":"Sat, 14 Feb 2026 15:01:37 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/FlynticStudio.Web/js/drone-studio.js">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\drone-studio.js'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-Kg1TMecYkzcv8v3zj2VBcsoNOyRLAY3A9\u002BYXEeekKNY="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"90659"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022Kg1TMecYkzcv8v3zj2VBcsoNOyRLAY3A9\u002BYXEeekKNY=\u0022"},{"Name":"Last-Modified","Value":"Sat, 14 Feb 2026 15:01:37 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+  </ItemGroup>
+</Project>
