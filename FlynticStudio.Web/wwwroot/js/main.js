@@ -159,6 +159,11 @@ window.deleteSelected = async function () {
         toDelete.forEach(id => {
             if (window.threeScene) window.threeScene.removeComponent(id);
             if (placedComponents[id]) delete placedComponents[id];
+
+            if (dragInteraction && dragInteraction.transformControls.object?.userData?.id === id) {
+                dragInteraction.transformControls.detach();
+                dragInteraction.highlightBox.visible = false;
+            }
         });
     }
 }

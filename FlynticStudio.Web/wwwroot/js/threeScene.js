@@ -74,6 +74,33 @@ export class ThreeScene {
         plane.receiveShadow = true;
         this.scene.add(plane);
         this.floor = plane; // Save reference for raycasting
+
+        // XYZ Axes Helper
+        const axesHelper = new THREE.AxesHelper(10);
+        axesHelper.position.y = 0.02;
+        this.scene.add(axesHelper);
+    }
+
+    createNeonMesh(geometry, colorHex) {
+        const group = new THREE.Group();
+
+        // Inner translucent solid
+        const solidMat = new THREE.MeshStandardMaterial({
+            color: colorHex,
+            transparent: true,
+            opacity: 0.15,
+            depthWrite: false
+        });
+        const mesh = new THREE.Mesh(geometry, solidMat);
+        group.add(mesh);
+
+        // Glowing wire edges
+        const edges = new THREE.EdgesGeometry(geometry);
+        const lineMat = new THREE.LineBasicMaterial({ color: colorHex });
+        const line = new THREE.LineSegments(edges, lineMat);
+        group.add(line);
+
+        return group;
     }
 
     onWindowResize() {
@@ -93,30 +120,23 @@ export class ThreeScene {
         group.name = id;
         group.userData = { id, type: 'Frame' };
 
-        const armMaterial = new THREE.MeshStandardMaterial({ color: 0xb0b0b0, roughness: 0.5 });
-        const centerMaterial = new THREE.MeshStandardMaterial({ color: 0x4a90e2, roughness: 0.4 });
-
         // Center body
         const centerGeometry = new THREE.BoxGeometry(2, 0.5, 2);
-        const center = new THREE.Mesh(centerGeometry, centerMaterial);
+        const center = this.createNeonMesh(centerGeometry, 0x00ffff); // Cyan
         center.position.y = 0.5; // Lift up slightly
-        center.castShadow = true;
-        center.receiveShadow = true;
         group.add(center);
 
         // Arms (X shape)
         const armGeometry = new THREE.BoxGeometry(8, 0.2, 0.5);
 
-        const arm1 = new THREE.Mesh(armGeometry, armMaterial);
+        const arm1 = this.createNeonMesh(armGeometry, 0x00ffff);
         arm1.rotation.y = Math.PI / 4;
         arm1.position.y = 0.5;
-        arm1.castShadow = true;
         group.add(arm1);
 
-        const arm2 = new THREE.Mesh(armGeometry, armMaterial);
+        const arm2 = this.createNeonMesh(armGeometry, 0x00ffff);
         arm2.rotation.y = -Math.PI / 4;
         arm2.position.y = 0.5;
-        arm2.castShadow = true;
         group.add(arm2);
 
         return group;
@@ -129,16 +149,13 @@ export class ThreeScene {
 
         // Motor base
         const baseGeom = new THREE.CylinderGeometry(0.4, 0.4, 0.6, 16);
-        const mat = new THREE.MeshStandardMaterial({ color: 0xe0e0e0, metalness: 0.8, roughness: 0.2 });
-        const motor = new THREE.Mesh(baseGeom, mat);
+        const motor = this.createNeonMesh(baseGeom, 0xff5500); // Orange neon
         motor.position.y = 0.3;
-        motor.castShadow = true;
         group.add(motor);
 
         // Propeller
         const propGeom = new THREE.BoxGeometry(3, 0.05, 0.3);
-        const propMat = new THREE.MeshStandardMaterial({ color: 0xff3333, transparent: true, opacity: 0.9, roughness: 0.2 });
-        const prop = new THREE.Mesh(propGeom, propMat);
+        const prop = this.createNeonMesh(propGeom, 0xffaa00); // Yellow neon
         prop.position.y = 0.65;
         prop.name = "propeller";
         group.add(prop);
@@ -154,10 +171,8 @@ export class ThreeScene {
         group.userData = { id, type: 'Battery' };
 
         const geom = new THREE.BoxGeometry(1.5, 0.8, 3);
-        const mat = new THREE.MeshStandardMaterial({ color: 0x00aaff, roughness: 0.4 });
-        const mesh = new THREE.Mesh(geom, mat);
+        const mesh = this.createNeonMesh(geom, 0x00ff00); // Neon green
         mesh.position.y = 1.15; // Set it on top of the frame
-        mesh.castShadow = true;
         group.add(mesh);
 
         return group;
