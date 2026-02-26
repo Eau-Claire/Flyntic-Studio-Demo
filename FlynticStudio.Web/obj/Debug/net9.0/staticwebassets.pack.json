@@ -13,8 +13,8 @@
       "PackagePath": "staticwebassets/js/drone-studio.js"
     },
     {
-      "Id": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/wwwroot/js/simulation.js",
-      "PackagePath": "staticwebassets/js/simulation.js"
+      "Id": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/wwwroot/js/main.js",
+      "PackagePath": "staticwebassets/js/main.js"
     },
     {
       "Id": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/wwwroot/js/threeScene.js",

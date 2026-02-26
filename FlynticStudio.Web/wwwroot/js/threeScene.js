@@ -9,7 +9,7 @@ export class ThreeScene {
         this.container.innerHTML = "";
 
         this.scene = new THREE.Scene();
-        this.scene.background = new THREE.Color(0x1a1a1a);
+        this.scene.background = new THREE.Color(0x2a2a35);
 
         this.camera = new THREE.PerspectiveCamera(45, this.container.clientWidth / this.container.clientHeight, 0.1, 1000);
         this.camera.position.set(10, 10, 10);
@@ -60,13 +60,13 @@ export class ThreeScene {
     setupGrid() {
         // A lighter gray grid
         const gridHelper = new THREE.GridHelper(20, 20, 0x888888, 0x444444);
-        gridHelper.position.y = -0.01;
+        gridHelper.position.y = 0.01;
         this.scene.add(gridHelper);
 
         // Floor plane to receive shadows
         const planeGeometry = new THREE.PlaneGeometry(20, 20);
         const planeMaterial = new THREE.MeshStandardMaterial({
-            color: 0x1f1f1f,
+            color: 0x30303e,
             depthWrite: false
         });
         const plane = new THREE.Mesh(planeGeometry, planeMaterial);
@@ -93,8 +93,8 @@ export class ThreeScene {
         group.name = id;
         group.userData = { id, type: 'Frame' };
 
-        const armMaterial = new THREE.MeshStandardMaterial({ color: 0x333333, roughness: 0.7 });
-        const centerMaterial = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.5 });
+        const armMaterial = new THREE.MeshStandardMaterial({ color: 0xb0b0b0, roughness: 0.5 });
+        const centerMaterial = new THREE.MeshStandardMaterial({ color: 0x4a90e2, roughness: 0.4 });
 
         // Center body
         const centerGeometry = new THREE.BoxGeometry(2, 0.5, 2);
@@ -129,7 +129,7 @@ export class ThreeScene {
 
         // Motor base
         const baseGeom = new THREE.CylinderGeometry(0.4, 0.4, 0.6, 16);
-        const mat = new THREE.MeshStandardMaterial({ color: 0xc0c0c0, metalness: 0.8, roughness: 0.2 });
+        const mat = new THREE.MeshStandardMaterial({ color: 0xe0e0e0, metalness: 0.8, roughness: 0.2 });
         const motor = new THREE.Mesh(baseGeom, mat);
         motor.position.y = 0.3;
         motor.castShadow = true;
