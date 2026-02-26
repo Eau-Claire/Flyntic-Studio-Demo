@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "HRcAqNdM324HqYZjMX4lY4Gi1zHT0v7m6lSb9ILwI+w=",
+  "Hash": "Yo6RFLaLA/cfKwzgiIdXbHT0a6/7UWmzlgLEZiQ54Vw=",
   "Source": "FlynticStudio.Web",
   "BasePath": "_content/FlynticStudio.Web",
   "Mode": "Default",
@@ -17,12 +17,33 @@
   ],
   "Assets": [
     {
-      "Identity": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/j0keyd6vp1-dimk3vlw6r.gz",
+      "Identity": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/f1apxyxmcu-f9gk141a01.gz",
       "SourceId": "FlynticStudio.Web",
       "SourceType": "Discovered",
       "ContentRoot": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/",
       "BasePath": "_content/FlynticStudio.Web",
-      "RelativePath": "css/site#[.{fingerprint=dimk3vlw6r}]?.css.gz",
+      "RelativePath": "js/simulation#[.{fingerprint=f9gk141a01}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/wwwroot/js/simulation.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "13qk5lk25b",
+      "Integrity": "DRrZOhcqbgtxRzvbN/pu9rLSi1SvQgl7BGve1jWcRLA=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/wwwroot/js/simulation.js"
+    },
+    {
+      "Identity": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/j0keyd6vp1-jf9z4ygdv6.gz",
+      "SourceId": "FlynticStudio.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/",
+      "BasePath": "_content/FlynticStudio.Web",
+      "RelativePath": "css/site#[.{fingerprint=jf9z4ygdv6}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -31,8 +52,8 @@
       "RelatedAsset": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/wwwroot/css/site.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "pbm66cpt3m",
-      "Integrity": "ewNBJWf+L+/Lab4T2Vu33xGEUSUy0xMMWycEgonYH8Q=",
+      "Fingerprint": "7zx2bwd6hj",
+      "Integrity": "fSzJ2Vo409bJ8AnodhKPeV6nQcRCW2c1ewLj23Dxdjo=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/wwwroot/css/site.css"
@@ -59,6 +80,48 @@
       "OriginalItemSpec": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/wwwroot/js/drone-studio.js"
     },
     {
+      "Identity": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/mvnm7ryghu-0icd61f91r.gz",
+      "SourceId": "FlynticStudio.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/",
+      "BasePath": "_content/FlynticStudio.Web",
+      "RelativePath": "js/threeScene#[.{fingerprint=0icd61f91r}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/wwwroot/js/threeScene.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "fb5aqi6qlz",
+      "Integrity": "lQTho691juHEAHEosBGwFIBB+RWMJ5PqywP17NyFARc=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/wwwroot/js/threeScene.js"
+    },
+    {
+      "Identity": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/u60hip09b9-7973lh4x3l.gz",
+      "SourceId": "FlynticStudio.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/",
+      "BasePath": "_content/FlynticStudio.Web",
+      "RelativePath": "js/dragInteraction#[.{fingerprint=7973lh4x3l}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/wwwroot/js/dragInteraction.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "qh3ppmmnve",
+      "Integrity": "7s6W56MnL94yICOK9woJyss0XXu55txuE/NEHzaw3HM=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/wwwroot/js/dragInteraction.js"
+    },
+    {
       "Identity": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/wwwroot/css/site.css",
       "SourceId": "FlynticStudio.Web",
       "SourceType": "Discovered",
@@ -73,11 +136,32 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "dimk3vlw6r",
-      "Integrity": "9b3rGDpZvKVTYhcYlg9J0VXOM+a7sWpR1ztI6+h5A4c=",
+      "Fingerprint": "jf9z4ygdv6",
+      "Integrity": "f6ba0b4a0qMb6v+ud4ucC1+3prpqnBF9F1fsP8tbwYs=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/css/site.css"
+    },
+    {
+      "Identity": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/wwwroot/js/dragInteraction.js",
+      "SourceId": "FlynticStudio.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/wwwroot/",
+      "BasePath": "_content/FlynticStudio.Web",
+      "RelativePath": "js/dragInteraction#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "7973lh4x3l",
+      "Integrity": "hR+1W28v9IDhl0Ay9Nv85OomBmpKnuHh5fxAv2mytpM=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/js/dragInteraction.js"
     },
     {
       "Identity": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/wwwroot/js/drone-studio.js",
@@ -99,17 +183,59 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/js/drone-studio.js"
+    },
+    {
+      "Identity": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/wwwroot/js/simulation.js",
+      "SourceId": "FlynticStudio.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/wwwroot/",
+      "BasePath": "_content/FlynticStudio.Web",
+      "RelativePath": "js/simulation#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "f9gk141a01",
+      "Integrity": "U1B0FCbhYWkxeNScgVjGXQesQYfQfDmG7xxNY/9zESc=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/js/simulation.js"
+    },
+    {
+      "Identity": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/wwwroot/js/threeScene.js",
+      "SourceId": "FlynticStudio.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/wwwroot/",
+      "BasePath": "_content/FlynticStudio.Web",
+      "RelativePath": "js/threeScene#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "0icd61f91r",
+      "Integrity": "eOWCldZjgnKvochuxNNPg4lfGHKHpTPZUBdM9J9m8iY=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/js/threeScene.js"
     }
   ],
   "Endpoints": [
     {
       "Route": "css/site.css",
-      "AssetFile": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/j0keyd6vp1-dimk3vlw6r.gz",
+      "AssetFile": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/j0keyd6vp1-jf9z4ygdv6.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000220215811"
+          "Quality": "0.001233045623"
         }
       ],
       "ResponseHeaders": [
@@ -119,15 +245,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4540"
+          "Value": "810"
         },
         {
           "Name": "ETag",
-          "Value": "\"ewNBJWf+L+/Lab4T2Vu33xGEUSUy0xMMWycEgonYH8Q=\""
+          "Value": "\"fSzJ2Vo409bJ8AnodhKPeV6nQcRCW2c1ewLj23Dxdjo=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 14 Feb 2026 15:01:37 GMT"
+          "Value": "Thu, 26 Feb 2026 14:08:57 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -147,13 +273,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"9b3rGDpZvKVTYhcYlg9J0VXOM+a7sWpR1ztI6+h5A4c=\""
+          "Value": "W/\"f6ba0b4a0qMb6v+ud4ucC1+3prpqnBF9F1fsP8tbwYs=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-9b3rGDpZvKVTYhcYlg9J0VXOM+a7sWpR1ztI6+h5A4c="
+          "Value": "sha256-f6ba0b4a0qMb6v+ud4ucC1+3prpqnBF9F1fsP8tbwYs="
         }
       ]
     },
@@ -168,7 +294,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "25019"
+          "Value": "2199"
         },
         {
           "Name": "Content-Type",
@@ -176,11 +302,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"9b3rGDpZvKVTYhcYlg9J0VXOM+a7sWpR1ztI6+h5A4c=\""
+          "Value": "\"f6ba0b4a0qMb6v+ud4ucC1+3prpqnBF9F1fsP8tbwYs=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 14 Feb 2026 15:01:37 GMT"
+          "Value": "Thu, 26 Feb 2026 14:08:57 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -190,13 +316,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-9b3rGDpZvKVTYhcYlg9J0VXOM+a7sWpR1ztI6+h5A4c="
+          "Value": "sha256-f6ba0b4a0qMb6v+ud4ucC1+3prpqnBF9F1fsP8tbwYs="
         }
       ]
     },
     {
       "Route": "css/site.css.gz",
-      "AssetFile": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/j0keyd6vp1-dimk3vlw6r.gz",
+      "AssetFile": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/j0keyd6vp1-jf9z4ygdv6.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -205,7 +331,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4540"
+          "Value": "810"
         },
         {
           "Name": "Content-Type",
@@ -213,11 +339,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ewNBJWf+L+/Lab4T2Vu33xGEUSUy0xMMWycEgonYH8Q=\""
+          "Value": "\"fSzJ2Vo409bJ8AnodhKPeV6nQcRCW2c1ewLj23Dxdjo=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 14 Feb 2026 15:01:37 GMT"
+          "Value": "Thu, 26 Feb 2026 14:08:57 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -235,18 +361,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-ewNBJWf+L+/Lab4T2Vu33xGEUSUy0xMMWycEgonYH8Q="
+          "Value": "sha256-fSzJ2Vo409bJ8AnodhKPeV6nQcRCW2c1ewLj23Dxdjo="
         }
       ]
     },
     {
-      "Route": "css/site.dimk3vlw6r.css",
-      "AssetFile": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/j0keyd6vp1-dimk3vlw6r.gz",
+      "Route": "css/site.jf9z4ygdv6.css",
+      "AssetFile": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/j0keyd6vp1-jf9z4ygdv6.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000220215811"
+          "Quality": "0.001233045623"
         }
       ],
       "ResponseHeaders": [
@@ -256,15 +382,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4540"
+          "Value": "810"
         },
         {
           "Name": "ETag",
-          "Value": "\"ewNBJWf+L+/Lab4T2Vu33xGEUSUy0xMMWycEgonYH8Q=\""
+          "Value": "\"fSzJ2Vo409bJ8AnodhKPeV6nQcRCW2c1ewLj23Dxdjo=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 14 Feb 2026 15:01:37 GMT"
+          "Value": "Thu, 26 Feb 2026 14:08:57 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -284,13 +410,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"9b3rGDpZvKVTYhcYlg9J0VXOM+a7sWpR1ztI6+h5A4c=\""
+          "Value": "W/\"f6ba0b4a0qMb6v+ud4ucC1+3prpqnBF9F1fsP8tbwYs=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "dimk3vlw6r"
+          "Value": "jf9z4ygdv6"
         },
         {
           "Name": "label",
@@ -298,12 +424,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-9b3rGDpZvKVTYhcYlg9J0VXOM+a7sWpR1ztI6+h5A4c="
+          "Value": "sha256-f6ba0b4a0qMb6v+ud4ucC1+3prpqnBF9F1fsP8tbwYs="
         }
       ]
     },
     {
-      "Route": "css/site.dimk3vlw6r.css",
+      "Route": "css/site.jf9z4ygdv6.css",
       "AssetFile": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/wwwroot/css/site.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -313,7 +439,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "25019"
+          "Value": "2199"
         },
         {
           "Name": "Content-Type",
@@ -321,11 +447,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"9b3rGDpZvKVTYhcYlg9J0VXOM+a7sWpR1ztI6+h5A4c=\""
+          "Value": "\"f6ba0b4a0qMb6v+ud4ucC1+3prpqnBF9F1fsP8tbwYs=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 14 Feb 2026 15:01:37 GMT"
+          "Value": "Thu, 26 Feb 2026 14:08:57 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -335,7 +461,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "dimk3vlw6r"
+          "Value": "jf9z4ygdv6"
         },
         {
           "Name": "label",
@@ -343,13 +469,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-9b3rGDpZvKVTYhcYlg9J0VXOM+a7sWpR1ztI6+h5A4c="
+          "Value": "sha256-f6ba0b4a0qMb6v+ud4ucC1+3prpqnBF9F1fsP8tbwYs="
         }
       ]
     },
     {
-      "Route": "css/site.dimk3vlw6r.css.gz",
-      "AssetFile": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/j0keyd6vp1-dimk3vlw6r.gz",
+      "Route": "css/site.jf9z4ygdv6.css.gz",
+      "AssetFile": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/j0keyd6vp1-jf9z4ygdv6.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -358,7 +484,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4540"
+          "Value": "810"
         },
         {
           "Name": "Content-Type",
@@ -366,11 +492,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ewNBJWf+L+/Lab4T2Vu33xGEUSUy0xMMWycEgonYH8Q=\""
+          "Value": "\"fSzJ2Vo409bJ8AnodhKPeV6nQcRCW2c1ewLj23Dxdjo=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 14 Feb 2026 15:01:37 GMT"
+          "Value": "Thu, 26 Feb 2026 14:08:57 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -388,7 +514,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "dimk3vlw6r"
+          "Value": "jf9z4ygdv6"
         },
         {
           "Name": "label",
@@ -396,7 +522,305 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-ewNBJWf+L+/Lab4T2Vu33xGEUSUy0xMMWycEgonYH8Q="
+          "Value": "sha256-fSzJ2Vo409bJ8AnodhKPeV6nQcRCW2c1ewLj23Dxdjo="
+        }
+      ]
+    },
+    {
+      "Route": "js/dragInteraction.7973lh4x3l.js",
+      "AssetFile": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/u60hip09b9-7973lh4x3l.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000750750751"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1331"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7s6W56MnL94yICOK9woJyss0XXu55txuE/NEHzaw3HM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 26 Feb 2026 14:10:15 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"hR+1W28v9IDhl0Ay9Nv85OomBmpKnuHh5fxAv2mytpM=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "7973lh4x3l"
+        },
+        {
+          "Name": "label",
+          "Value": "js/dragInteraction.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-hR+1W28v9IDhl0Ay9Nv85OomBmpKnuHh5fxAv2mytpM="
+        }
+      ]
+    },
+    {
+      "Route": "js/dragInteraction.7973lh4x3l.js",
+      "AssetFile": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/wwwroot/js/dragInteraction.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4390"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"hR+1W28v9IDhl0Ay9Nv85OomBmpKnuHh5fxAv2mytpM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 26 Feb 2026 14:10:15 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "7973lh4x3l"
+        },
+        {
+          "Name": "label",
+          "Value": "js/dragInteraction.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-hR+1W28v9IDhl0Ay9Nv85OomBmpKnuHh5fxAv2mytpM="
+        }
+      ]
+    },
+    {
+      "Route": "js/dragInteraction.7973lh4x3l.js.gz",
+      "AssetFile": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/u60hip09b9-7973lh4x3l.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1331"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7s6W56MnL94yICOK9woJyss0XXu55txuE/NEHzaw3HM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 26 Feb 2026 14:10:15 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "7973lh4x3l"
+        },
+        {
+          "Name": "label",
+          "Value": "js/dragInteraction.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-7s6W56MnL94yICOK9woJyss0XXu55txuE/NEHzaw3HM="
+        }
+      ]
+    },
+    {
+      "Route": "js/dragInteraction.js",
+      "AssetFile": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/u60hip09b9-7973lh4x3l.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000750750751"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1331"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7s6W56MnL94yICOK9woJyss0XXu55txuE/NEHzaw3HM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 26 Feb 2026 14:10:15 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"hR+1W28v9IDhl0Ay9Nv85OomBmpKnuHh5fxAv2mytpM=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-hR+1W28v9IDhl0Ay9Nv85OomBmpKnuHh5fxAv2mytpM="
+        }
+      ]
+    },
+    {
+      "Route": "js/dragInteraction.js",
+      "AssetFile": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/wwwroot/js/dragInteraction.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4390"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"hR+1W28v9IDhl0Ay9Nv85OomBmpKnuHh5fxAv2mytpM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 26 Feb 2026 14:10:15 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-hR+1W28v9IDhl0Ay9Nv85OomBmpKnuHh5fxAv2mytpM="
+        }
+      ]
+    },
+    {
+      "Route": "js/dragInteraction.js.gz",
+      "AssetFile": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/u60hip09b9-7973lh4x3l.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1331"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7s6W56MnL94yICOK9woJyss0XXu55txuE/NEHzaw3HM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 26 Feb 2026 14:10:15 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-7s6W56MnL94yICOK9woJyss0XXu55txuE/NEHzaw3HM="
         }
       ]
     },
@@ -695,6 +1119,602 @@
         {
           "Name": "integrity",
           "Value": "sha256-dNc9ezx1fIHDLzdnpO8Idu3HEeLwf6VxHha1oXTKssw="
+        }
+      ]
+    },
+    {
+      "Route": "js/simulation.f9gk141a01.js",
+      "AssetFile": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/f1apxyxmcu-f9gk141a01.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000830564784"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1203"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"DRrZOhcqbgtxRzvbN/pu9rLSi1SvQgl7BGve1jWcRLA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 26 Feb 2026 14:11:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"U1B0FCbhYWkxeNScgVjGXQesQYfQfDmG7xxNY/9zESc=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "f9gk141a01"
+        },
+        {
+          "Name": "label",
+          "Value": "js/simulation.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-U1B0FCbhYWkxeNScgVjGXQesQYfQfDmG7xxNY/9zESc="
+        }
+      ]
+    },
+    {
+      "Route": "js/simulation.f9gk141a01.js",
+      "AssetFile": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/wwwroot/js/simulation.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3955"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"U1B0FCbhYWkxeNScgVjGXQesQYfQfDmG7xxNY/9zESc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 26 Feb 2026 14:11:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "f9gk141a01"
+        },
+        {
+          "Name": "label",
+          "Value": "js/simulation.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-U1B0FCbhYWkxeNScgVjGXQesQYfQfDmG7xxNY/9zESc="
+        }
+      ]
+    },
+    {
+      "Route": "js/simulation.f9gk141a01.js.gz",
+      "AssetFile": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/f1apxyxmcu-f9gk141a01.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1203"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"DRrZOhcqbgtxRzvbN/pu9rLSi1SvQgl7BGve1jWcRLA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 26 Feb 2026 14:11:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "f9gk141a01"
+        },
+        {
+          "Name": "label",
+          "Value": "js/simulation.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-DRrZOhcqbgtxRzvbN/pu9rLSi1SvQgl7BGve1jWcRLA="
+        }
+      ]
+    },
+    {
+      "Route": "js/simulation.js",
+      "AssetFile": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/f1apxyxmcu-f9gk141a01.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000830564784"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1203"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"DRrZOhcqbgtxRzvbN/pu9rLSi1SvQgl7BGve1jWcRLA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 26 Feb 2026 14:11:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"U1B0FCbhYWkxeNScgVjGXQesQYfQfDmG7xxNY/9zESc=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-U1B0FCbhYWkxeNScgVjGXQesQYfQfDmG7xxNY/9zESc="
+        }
+      ]
+    },
+    {
+      "Route": "js/simulation.js",
+      "AssetFile": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/wwwroot/js/simulation.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3955"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"U1B0FCbhYWkxeNScgVjGXQesQYfQfDmG7xxNY/9zESc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 26 Feb 2026 14:11:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-U1B0FCbhYWkxeNScgVjGXQesQYfQfDmG7xxNY/9zESc="
+        }
+      ]
+    },
+    {
+      "Route": "js/simulation.js.gz",
+      "AssetFile": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/f1apxyxmcu-f9gk141a01.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1203"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"DRrZOhcqbgtxRzvbN/pu9rLSi1SvQgl7BGve1jWcRLA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 26 Feb 2026 14:11:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-DRrZOhcqbgtxRzvbN/pu9rLSi1SvQgl7BGve1jWcRLA="
+        }
+      ]
+    },
+    {
+      "Route": "js/threeScene.0icd61f91r.js",
+      "AssetFile": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/mvnm7ryghu-0icd61f91r.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000446229362"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2240"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"lQTho691juHEAHEosBGwFIBB+RWMJ5PqywP17NyFARc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 26 Feb 2026 14:09:38 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"eOWCldZjgnKvochuxNNPg4lfGHKHpTPZUBdM9J9m8iY=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "0icd61f91r"
+        },
+        {
+          "Name": "label",
+          "Value": "js/threeScene.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-eOWCldZjgnKvochuxNNPg4lfGHKHpTPZUBdM9J9m8iY="
+        }
+      ]
+    },
+    {
+      "Route": "js/threeScene.0icd61f91r.js",
+      "AssetFile": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/wwwroot/js/threeScene.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6156"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"eOWCldZjgnKvochuxNNPg4lfGHKHpTPZUBdM9J9m8iY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 26 Feb 2026 14:09:38 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "0icd61f91r"
+        },
+        {
+          "Name": "label",
+          "Value": "js/threeScene.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-eOWCldZjgnKvochuxNNPg4lfGHKHpTPZUBdM9J9m8iY="
+        }
+      ]
+    },
+    {
+      "Route": "js/threeScene.0icd61f91r.js.gz",
+      "AssetFile": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/mvnm7ryghu-0icd61f91r.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2240"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"lQTho691juHEAHEosBGwFIBB+RWMJ5PqywP17NyFARc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 26 Feb 2026 14:09:38 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "0icd61f91r"
+        },
+        {
+          "Name": "label",
+          "Value": "js/threeScene.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-lQTho691juHEAHEosBGwFIBB+RWMJ5PqywP17NyFARc="
+        }
+      ]
+    },
+    {
+      "Route": "js/threeScene.js",
+      "AssetFile": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/mvnm7ryghu-0icd61f91r.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000446229362"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2240"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"lQTho691juHEAHEosBGwFIBB+RWMJ5PqywP17NyFARc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 26 Feb 2026 14:09:38 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"eOWCldZjgnKvochuxNNPg4lfGHKHpTPZUBdM9J9m8iY=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-eOWCldZjgnKvochuxNNPg4lfGHKHpTPZUBdM9J9m8iY="
+        }
+      ]
+    },
+    {
+      "Route": "js/threeScene.js",
+      "AssetFile": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/wwwroot/js/threeScene.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6156"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"eOWCldZjgnKvochuxNNPg4lfGHKHpTPZUBdM9J9m8iY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 26 Feb 2026 14:09:38 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-eOWCldZjgnKvochuxNNPg4lfGHKHpTPZUBdM9J9m8iY="
+        }
+      ]
+    },
+    {
+      "Route": "js/threeScene.js.gz",
+      "AssetFile": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/mvnm7ryghu-0icd61f91r.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2240"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"lQTho691juHEAHEosBGwFIBB+RWMJ5PqywP17NyFARc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 26 Feb 2026 14:09:38 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-lQTho691juHEAHEosBGwFIBB+RWMJ5PqywP17NyFARc="
         }
       ]
     }

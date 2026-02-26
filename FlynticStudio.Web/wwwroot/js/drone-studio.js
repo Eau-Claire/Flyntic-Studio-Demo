@@ -30,11 +30,11 @@ const Studio = {
 // Initialize
 // ===============================================
 document.addEventListener('DOMContentLoaded', () => {
-    initDragDrop();
+    // initDragDrop(); // Disabled for 3D
     initBlocksDragDrop();
     initCanvasEvents();
     initKeyboard();
-    renderPlacedComponents();
+    // renderPlacedComponents(); // Disabled for 3D
     updateComponentCount();
     log('info', 'Flyntic Studio ready');
 });
@@ -44,12 +44,12 @@ document.addEventListener('DOMContentLoaded', () => {
 // ===============================================
 function switchTab(tabName) {
     Studio.currentTab = tabName;
-    
+
     // Update tab buttons
     document.querySelectorAll('.workspace-tab').forEach(tab => {
         tab.classList.toggle('active', tab.dataset.tab === tabName);
     });
-    
+
     // Update tab panes
     document.querySelectorAll('.tab-pane').forEach(pane => {
         pane.classList.toggle('active', pane.id === 'tab-' + tabName);
@@ -61,22 +61,22 @@ function switchTab(tabName) {
 // ===============================================
 function selectCategory(category) {
     Studio.currentCategory = category;
-    
+
     // Update category buttons
     document.querySelectorAll('.block-category').forEach(cat => {
         cat.classList.remove('active');
     });
     document.querySelector(`.block-category.${category}`)?.classList.add('active');
-    
+
     // Show relevant blocks
     const palette = document.getElementById('blockPalette');
     if (!palette) return;
-    
+
     // Hide all category-specific blocks
     palette.querySelectorAll('.events-blocks, .motion-blocks, .control-blocks, .sensing-blocks, .operators-blocks, .variables-blocks').forEach(el => {
         el.style.display = 'none';
     });
-    
+
     // Show selected category blocks
     const categoryBlocks = palette.querySelector(`.${category}-blocks`);
     if (categoryBlocks) {
@@ -90,10 +90,10 @@ function selectCategory(category) {
 function log(type, message) {
     // Guard against undefined/null messages
     if (message === undefined || message === null) return;
-    
+
     const consoleEl = document.getElementById('consoleContent');
     if (!consoleEl) return;
-    
+
     const time = new Date().toLocaleTimeString('en-US', { hour12: false });
     const line = document.createElement('div');
     line.className = `console-line ${type}`;
@@ -128,11 +128,11 @@ function togglePlay() {
 async function playSimulation() {
     Studio.simulationState = 'playing';
     updateSimulationUI();
-    
+
     try {
         const response = await fetch('/api/drone/simulation/play', { method: 'POST' });
         const result = await response.json();
-        
+
         if (result.success) {
             updateMonitorsWithResult(result.calculationResult);
             log('success', 'Simulation started');
@@ -146,7 +146,7 @@ async function playSimulation() {
 async function pauseSimulation() {
     Studio.simulationState = 'paused';
     updateSimulationUI();
-    
+
     await fetch('/api/drone/simulation/pause', { method: 'POST' });
     log('warning', 'Simulation paused');
     document.getElementById('canvasStatus').textContent = 'Paused';
@@ -155,7 +155,7 @@ async function pauseSimulation() {
 async function stopSimulation() {
     Studio.simulationState = 'stopped';
     updateSimulationUI();
-    
+
     await fetch('/api/drone/simulation/stop', { method: 'POST' });
     log('info', 'Simulation stopped');
     document.getElementById('canvasStatus').textContent = 'Ready to simulate';
@@ -166,7 +166,7 @@ function updateSimulationUI() {
     const playIcon = document.getElementById('playIcon');
     const pauseBtn = document.getElementById('btnPause');
     const stopBtn = document.getElementById('btnStop');
-    
+
     if (Studio.simulationState === 'playing') {
         playBtn.classList.add('playing');
         playIcon.className = 'bi bi-pause-fill';
@@ -189,7 +189,7 @@ function initDragDrop() {
         item.addEventListener('dragstart', onComponentDragStart);
         item.addEventListener('dragend', onComponentDragEnd);
     });
-    
+
     const canvas = document.getElementById('assemblyCanvas');
     if (canvas) {
         canvas.addEventListener('dragover', onCanvasDragOver);
@@ -208,10 +208,10 @@ function onComponentDragStart(e) {
         color: e.target.dataset.componentColor,
         icon: e.target.dataset.componentIcon
     };
-    
+
     e.dataTransfer.setData('text/plain', JSON.stringify(draggedComponent));
     e.dataTransfer.effectAllowed = 'copy';
-    
+
     createDropIndicator();
     updateStatus('Dragging: ' + draggedComponent.name);
 }
@@ -225,16 +225,16 @@ function onComponentDragEnd(e) {
 function onCanvasDragOver(e) {
     e.preventDefault();
     e.dataTransfer.dropEffect = 'copy';
-    
+
     if (dropIndicator && draggedComponent) {
         const canvas = document.getElementById('assemblyCanvas');
         const rect = canvas.getBoundingClientRect();
         const x = e.clientX - rect.left + canvas.parentElement.scrollLeft;
         const y = e.clientY - rect.top + canvas.parentElement.scrollTop;
-        
+
         const gridX = Math.floor(x / Studio.gridCellSize);
         const gridY = Math.floor(y / Studio.gridCellSize);
-        
+
         dropIndicator.style.left = (gridX * Studio.gridCellSize) + 'px';
         dropIndicator.style.top = (gridY * Studio.gridCellSize) + 'px';
         dropIndicator.style.width = (draggedComponent.width * Studio.gridCellSize) + 'px';
@@ -252,21 +252,21 @@ function onCanvasDragLeave(e) {
 async function onCanvasDrop(e) {
     e.preventDefault();
     removeDropIndicator();
-    
+
     if (!draggedComponent) return;
-    
+
     // Save reference before async operations
     const componentToPlace = { ...draggedComponent };
     draggedComponent = null; // Clear immediately to prevent race conditions
-    
+
     const canvas = document.getElementById('assemblyCanvas');
     const rect = canvas.getBoundingClientRect();
     const x = e.clientX - rect.left + canvas.parentElement.scrollLeft;
     const y = e.clientY - rect.top + canvas.parentElement.scrollTop;
-    
+
     const gridX = Math.floor(x / Studio.gridCellSize);
     const gridY = Math.floor(y / Studio.gridCellSize);
-    
+
     try {
         const response = await fetch('/api/drone/place', {
             method: 'POST',
@@ -277,22 +277,22 @@ async function onCanvasDrop(e) {
                 gridY: gridY
             })
         });
-        
+
         if (!response.ok) {
             const errorData = await response.json();
             log('error', errorData.error || 'Failed to place component');
             return;
         }
-        
+
         const placedComponent = await response.json();
-        
+
         if (placedComponent && placedComponent.instanceId) {
             Studio.placedComponents.push(placedComponent);
             renderPlacedComponent(placedComponent, componentToPlace);
             updateMonitors();
             updateComponentCount();
             addToHierarchy(placedComponent.instanceId, placedComponent.name, componentToPlace.type);
-            
+
             // Save to history for undo
             pushHistory({
                 type: 'place',
@@ -331,9 +331,9 @@ function removeDropIndicator() {
 function renderPlacedComponents() {
     const overlay = document.getElementById('gridOverlay');
     if (!overlay) return;
-    
+
     overlay.innerHTML = '';
-    
+
     Studio.placedComponents.forEach(placed => {
         const component = Studio.components.find(c => c.id === placed.componentId);
         if (component) {
@@ -345,13 +345,13 @@ function renderPlacedComponents() {
 function renderPlacedComponent(placed, componentData) {
     const overlay = document.getElementById('gridOverlay');
     if (!overlay) return;
-    
+
     // Use placed component data or fallback to componentData
     const width = (placed.width || componentData?.width || 1) * Studio.gridCellSize;
     const height = (placed.height || componentData?.height || 1) * Studio.gridCellSize;
     const componentType = placed.type || componentData?.type || placed.name || '';
     const componentColor = placed.color || componentData?.color || '#666';
-    
+
     const el = document.createElement('div');
     el.className = 'placed-component';
     el.id = 'component-' + placed.instanceId;
@@ -360,20 +360,20 @@ function renderPlacedComponent(placed, componentData) {
     el.style.top = (placed.gridY * Studio.gridCellSize) + 'px';
     el.style.width = width + 'px';
     el.style.height = height + 'px';
-    
+
     // Get realistic SVG based on component type
     const svgContent = getComponentSVG(componentType, componentColor, width, height);
-    
+
     el.innerHTML = `
         <div class="component-visual">${svgContent}</div>
         <span class="placed-component-name">${placed.name}</span>
     `;
-    
+
     // Add event listeners
     el.addEventListener('click', (e) => selectComponent(e, placed.instanceId));
     el.addEventListener('contextmenu', (e) => showContextMenu(e, placed.instanceId));
     el.addEventListener('mousedown', (e) => startComponentDrag(e, placed.instanceId));
-    
+
     overlay.appendChild(el);
 }
 
@@ -387,13 +387,13 @@ let componentDragOffset = { x: 0, y: 0 };
 function startComponentDrag(e, instanceId) {
     // Ignore right-click
     if (e.button !== 0) return;
-    
+
     e.preventDefault();
     e.stopPropagation();
-    
+
     const el = document.getElementById('component-' + instanceId);
     if (!el) return;
-    
+
     // Nếu component này chưa nằm trong selected thì chỉ chọn nó, còn nếu đã nằm trong selected thì giữ nguyên multi-select
     if (!Studio.selectedComponents.includes(instanceId)) {
         clearSelection();
@@ -402,7 +402,7 @@ function startComponentDrag(e, instanceId) {
         Studio.selectedComponents = [instanceId];
     }
     // Nếu đã nằm trong selectedComponents thì giữ nguyên trạng thái multi-select, không clearSelection
-    
+
     // Build dragging list
     draggingComponents = [];
     Studio.selectedComponents.forEach(id => {
@@ -421,7 +421,7 @@ function startComponentDrag(e, instanceId) {
             element.classList.add('dragging');
         }
     });
-    
+
     // Use primary component for offset
     const placed = Studio.placedComponents.find(c => c.instanceId === instanceId);
     draggingComponent = {
@@ -431,52 +431,52 @@ function startComponentDrag(e, instanceId) {
         oldGridX: placed?.gridX || 0,
         oldGridY: placed?.gridY || 0
     };
-    
+
     const rect = el.getBoundingClientRect();
     componentDragOffset.x = e.clientX - rect.left;
     componentDragOffset.y = e.clientY - rect.top;
-    
+
     document.addEventListener('mousemove', onComponentDrag);
     document.addEventListener('mouseup', stopComponentDrag);
 }
 
 function onComponentDrag(e) {
     if (!draggingComponent || draggingComponents.length === 0) return;
-    
+
     const overlay = document.getElementById('gridOverlay');
     const canvas = document.getElementById('assemblyCanvas');
     if (!overlay || !canvas) return;
-    
+
     const canvasRect = canvas.getBoundingClientRect();
     const scrollLeft = canvas.parentElement.scrollLeft;
     const scrollTop = canvas.parentElement.scrollTop;
-    
+
     // Calculate new position for primary component
     let x = e.clientX - canvasRect.left - componentDragOffset.x + scrollLeft;
     let y = e.clientY - canvasRect.top - componentDragOffset.y + scrollTop;
-    
+
     // Snap to grid
     const newGridX = Math.max(0, Math.round(x / Studio.gridCellSize));
     const newGridY = Math.max(0, Math.round(y / Studio.gridCellSize));
-    
+
     // Calculate delta
     const deltaX = newGridX - draggingComponent.oldGridX;
     const deltaY = newGridY - draggingComponent.oldGridY;
-    
+
     // Update all dragging components
     draggingComponents.forEach(comp => {
         comp.newGridX = comp.oldGridX + deltaX;
         comp.newGridY = comp.oldGridY + deltaY;
-        
+
         // Ensure non-negative
         comp.newGridX = Math.max(0, comp.newGridX);
         comp.newGridY = Math.max(0, comp.newGridY);
-        
+
         // Update visual position
         comp.element.style.left = (comp.newGridX * Studio.gridCellSize) + 'px';
         comp.element.style.top = (comp.newGridY * Studio.gridCellSize) + 'px';
     });
-    
+
     // Store new grid position for primary
     draggingComponent.newGridX = newGridX;
     draggingComponent.newGridY = newGridY;
@@ -488,17 +488,17 @@ async function stopComponentDrag(e) {
         document.removeEventListener('mouseup', stopComponentDrag);
         return;
     }
-    
+
     // Remove dragging class
     draggingComponents.forEach(comp => {
         comp.element.classList.remove('dragging');
     });
-    
+
     // Check if any component moved
-    const movedComponents = draggingComponents.filter(comp => 
+    const movedComponents = draggingComponents.filter(comp =>
         comp.newGridX !== comp.oldGridX || comp.newGridY !== comp.oldGridY
     );
-    
+
     if (movedComponents.length > 0) {
         try {
             // Update all moved components on server
@@ -512,7 +512,7 @@ async function stopComponentDrag(e) {
                         gridY: comp.newGridY
                     })
                 });
-                
+
                 if (response.ok) {
                     // Update local state
                     const placed = Studio.placedComponents.find(c => c.instanceId === comp.instanceId);
@@ -522,7 +522,7 @@ async function stopComponentDrag(e) {
                     }
                 }
             }
-            
+
             // Save to history for undo (multi-move)
             if (movedComponents.length === 1) {
                 pushHistory({
@@ -551,7 +551,7 @@ async function stopComponentDrag(e) {
             log('error', 'Failed to update position');
         }
     }
-    
+
     draggingComponent = null;
     draggingComponents = [];
     document.removeEventListener('mousemove', onComponentDrag);
@@ -563,7 +563,7 @@ function getComponentSVG(type, color, width, height) {
     const typeLower = (type || '').toString().toLowerCase();
     const w = width - 8;
     const h = height - 20;
-    
+
     // Quadcopter/Hexacopter Body - top-down 3D view
     if (typeLower.includes('quadcopter') || typeLower.includes('body')) {
         return `<svg viewBox="0 0 120 120" width="${w}" height="${h}">
@@ -606,7 +606,7 @@ function getComponentSVG(type, color, width, height) {
             <circle cx="70" cy="60" r="2" fill="#f44336"/>
         </svg>`;
     }
-    
+
     if (typeLower.includes('hexacopter')) {
         return `<svg viewBox="0 0 120 120" width="${w}" height="${h}">
             <defs>
@@ -633,7 +633,7 @@ function getComponentSVG(type, color, width, height) {
             <circle cx="21" cy="37" r="10" fill="#444" stroke="#666" stroke-width="1"/>
         </svg>`;
     }
-    
+
     // Motor SVG - realistic brushless motor 3D
     if (typeLower.includes('motor')) {
         return `<svg viewBox="0 0 60 70" width="${w}" height="${h}">
@@ -677,7 +677,7 @@ function getComponentSVG(type, color, width, height) {
             <path d="M45 55 Q50 60 52 65" stroke="#2c3e50" stroke-width="2" fill="none"/>
         </svg>`;
     }
-    
+
     // Frame SVG - carbon fiber X frame
     if (typeLower.includes('frame')) {
         return `<svg viewBox="0 0 100 100" width="${w}" height="${h}">
@@ -709,7 +709,7 @@ function getComponentSVG(type, color, width, height) {
             <circle cx="50" cy="50" r="8" fill="#1a1a1a" stroke="#444" stroke-width="1"/>
         </svg>`;
     }
-    
+
     // Battery SVG - LiPo battery 3D
     if (typeLower.includes('battery')) {
         return `<svg viewBox="0 0 90 50" width="${w}" height="${h}">
@@ -747,7 +747,7 @@ function getComponentSVG(type, color, width, height) {
             <circle cx="45" cy="9" r="1.5" fill="#2196f3"/>
         </svg>`;
     }
-    
+
     // Propeller SVG - 3D tri-blade
     if (typeLower.includes('prop')) {
         return `<svg viewBox="0 0 70 70" width="${w}" height="${h}">
@@ -769,7 +769,7 @@ function getComponentSVG(type, color, width, height) {
             <path d="M35 28 L38 32 L32 32 Z" fill="#4caf50"/>
         </svg>`;
     }
-    
+
     // ESC SVG - 4-in-1 3D
     if (typeLower.includes('esc')) {
         return `<svg viewBox="0 0 60 60" width="${w}" height="${h}">
@@ -797,7 +797,7 @@ function getComponentSVG(type, color, width, height) {
             <line x1="45" y1="5" x2="45" y2="10" stroke="#ffa000" stroke-width="3"/>
         </svg>`;
     }
-    
+
     // Flight Controller SVG - 3D detailed
     if (typeLower.includes('controller') || typeLower.includes('fc')) {
         return `<svg viewBox="0 0 60 60" width="${w}" height="${h}">
@@ -833,7 +833,7 @@ function getComponentSVG(type, color, width, height) {
             <circle cx="52" cy="52" r="2" fill="#1a1a1a" stroke="#555" stroke-width="1"/>
         </svg>`;
     }
-    
+
     // Camera SVG - FPV Camera 3D
     if (typeLower.includes('camera')) {
         return `<svg viewBox="0 0 50 50" width="${w}" height="${h}">
@@ -863,7 +863,7 @@ function getComponentSVG(type, color, width, height) {
             <rect x="36" y="8" width="6" height="6" fill="#444" stroke="#555" stroke-width="1"/>
         </svg>`;
     }
-    
+
     // GPS SVG - GPS Module 3D
     if (typeLower.includes('gps')) {
         return `<svg viewBox="0 0 50 60" width="${w}" height="${h}">
@@ -891,7 +891,7 @@ function getComponentSVG(type, color, width, height) {
             <circle cx="26" cy="50" r="2" fill="#ff9800"/>
         </svg>`;
     }
-    
+
     // Receiver SVG - 3D
     if (typeLower.includes('receiver') || typeLower.includes('rx')) {
         return `<svg viewBox="0 0 45 40" width="${w}" height="${h}">
@@ -918,7 +918,7 @@ function getComponentSVG(type, color, width, height) {
             <circle cx="8" cy="20" r="2" fill="#4caf50"/>
         </svg>`;
     }
-    
+
     // Default component
     return `<svg viewBox="0 0 40 40" width="${w}" height="${h}">
         <rect x="5" y="5" width="30" height="30" rx="3" fill="#2a2a2a" stroke="#555" stroke-width="2"/>
@@ -928,14 +928,14 @@ function getComponentSVG(type, color, width, height) {
 
 function selectComponent(e, instanceId) {
     e.stopPropagation();
-    
+
     const el = document.getElementById('component-' + instanceId);
     if (!el) return;
-    
+
     // Ctrl/Cmd click for multi-select
     if (e.ctrlKey || e.metaKey) {
         el.classList.toggle('selected');
-        
+
         if (el.classList.contains('selected')) {
             if (!Studio.selectedComponents.includes(instanceId)) {
                 Studio.selectedComponents.push(instanceId);
@@ -960,7 +960,7 @@ function selectComponent(e, instanceId) {
 function initCanvasEvents() {
     const canvas = document.getElementById('assemblyCanvas');
     if (!canvas) return;
-    
+
     // Click to deselect
     canvas.addEventListener('click', (e) => {
         if (e.target.id === 'assemblyCanvas' || e.target.id === 'gridOverlay') {
@@ -968,7 +968,7 @@ function initCanvasEvents() {
             hideContextMenu();
         }
     });
-    
+
     // Mouse position tracking
     canvas.addEventListener('mousemove', (e) => {
         const rect = canvas.getBoundingClientRect();
@@ -977,13 +977,13 @@ function initCanvasEvents() {
         const gridX = Math.floor(x / Studio.gridCellSize);
         const gridY = Math.floor(y / Studio.gridCellSize);
         document.getElementById('cursorPosition').textContent = `Grid: ${gridX}, ${gridY}`;
-        
+
         // Marquee selection
         if (Studio.isMarqueeSelecting) {
             updateMarquee(e);
         }
     });
-    
+
     // Marquee selection - mouse down
     canvas.addEventListener('mousedown', (e) => {
         // Only start marquee if clicking on empty area
@@ -993,14 +993,14 @@ function initCanvasEvents() {
             }
         }
     });
-    
+
     // Marquee selection - mouse up
     canvas.addEventListener('mouseup', (e) => {
         if (Studio.isMarqueeSelecting) {
             endMarquee(canvas);
         }
     });
-    
+
     // Mouse leave - end marquee
     canvas.addEventListener('mouseleave', () => {
         if (Studio.isMarqueeSelecting) {
@@ -1019,7 +1019,7 @@ function startMarquee(e, canvas) {
         x: e.clientX - rect.left + canvas.parentElement.scrollLeft,
         y: e.clientY - rect.top + canvas.parentElement.scrollTop
     };
-    
+
     // Create marquee element
     let marquee = document.getElementById('marqueeSelection');
     if (!marquee) {
@@ -1028,7 +1028,7 @@ function startMarquee(e, canvas) {
         marquee.className = 'marquee-selection';
         document.getElementById('gridOverlay').appendChild(marquee);
     }
-    
+
     marquee.style.left = Studio.marqueeStart.x + 'px';
     marquee.style.top = Studio.marqueeStart.y + 'px';
     marquee.style.width = '0';
@@ -1039,41 +1039,41 @@ function startMarquee(e, canvas) {
 function updateMarquee(e) {
     const marquee = document.getElementById('marqueeSelection');
     if (!marquee) return;
-    
+
     const canvas = document.getElementById('assemblyCanvas');
     const rect = canvas.getBoundingClientRect();
     const currentX = e.clientX - rect.left + canvas.parentElement.scrollLeft;
     const currentY = e.clientY - rect.top + canvas.parentElement.scrollTop;
-    
+
     const left = Math.min(Studio.marqueeStart.x, currentX);
     const top = Math.min(Studio.marqueeStart.y, currentY);
     const width = Math.abs(currentX - Studio.marqueeStart.x);
     const height = Math.abs(currentY - Studio.marqueeStart.y);
-    
+
     marquee.style.left = left + 'px';
     marquee.style.top = top + 'px';
     marquee.style.width = width + 'px';
     marquee.style.height = height + 'px';
-    
+
     // Highlight components within marquee
     highlightComponentsInMarquee(left, top, width, height);
 }
 
 function endMarquee(canvas) {
     Studio.isMarqueeSelecting = false;
-    
+
     const marquee = document.getElementById('marqueeSelection');
     if (marquee) {
         const left = parseInt(marquee.style.left);
         const top = parseInt(marquee.style.top);
         const width = parseInt(marquee.style.width);
         const height = parseInt(marquee.style.height);
-        
+
         // Select components within marquee
         if (width > 5 && height > 5) { // Minimum size to count as selection
             selectComponentsInRect(left, top, width, height);
         }
-        
+
         marquee.style.display = 'none';
     }
 }
@@ -1086,19 +1086,19 @@ function highlightComponentsInMarquee(left, top, width, height) {
             width: el.offsetWidth,
             height: el.offsetHeight
         };
-        
+
         const inMarquee = rectsIntersect(
             { left, top, width, height },
             elRect
         );
-        
+
         el.classList.toggle('marquee-hover', inMarquee);
     });
 }
 
 function selectComponentsInRect(left, top, width, height) {
     clearSelection();
-    
+
     document.querySelectorAll('.placed-component').forEach(el => {
         const elRect = {
             left: parseInt(el.style.left),
@@ -1106,7 +1106,7 @@ function selectComponentsInRect(left, top, width, height) {
             width: el.offsetWidth,
             height: el.offsetHeight
         };
-        
+
         if (rectsIntersect({ left, top, width, height }, elRect)) {
             el.classList.add('selected');
             el.classList.remove('marquee-hover');
@@ -1116,7 +1116,7 @@ function selectComponentsInRect(left, top, width, height) {
             }
         }
     });
-    
+
     if (Studio.selectedComponents.length > 0) {
         Studio.selectedComponent = Studio.selectedComponents[0];
     }
@@ -1124,9 +1124,9 @@ function selectComponentsInRect(left, top, width, height) {
 
 function rectsIntersect(r1, r2) {
     return !(r2.left > r1.left + r1.width ||
-             r2.left + r2.width < r1.left ||
-             r2.top > r1.top + r1.height ||
-             r2.top + r2.height < r1.top);
+        r2.left + r2.width < r1.left ||
+        r2.top > r1.top + r1.height ||
+        r2.top + r2.height < r1.top);
 }
 
 function clearSelection() {
@@ -1146,12 +1146,12 @@ function clearSelection() {
 function showContextMenu(e, instanceId) {
     e.preventDefault();
     selectComponent(e, instanceId);
-    
+
     const menu = document.getElementById('contextMenu');
     menu.style.left = e.clientX + 'px';
     menu.style.top = e.clientY + 'px';
     menu.classList.add('visible');
-    
+
     setTimeout(() => {
         document.addEventListener('click', hideContextMenu, { once: true });
     }, 0);
@@ -1163,33 +1163,33 @@ function hideContextMenu() {
 
 async function deleteSelected() {
     hideContextMenu();
-    
+
     // Delete all selected components
-    const toDelete = Studio.selectedComponents.length > 0 
-        ? [...Studio.selectedComponents] 
+    const toDelete = Studio.selectedComponents.length > 0
+        ? [...Studio.selectedComponents]
         : (Studio.selectedComponent ? [Studio.selectedComponent] : []);
-    
+
     if (toDelete.length === 0) {
         log('warning', 'No component selected');
         return;
     }
-    
+
     try {
         let deletedCount = 0;
-        
+
         for (const instanceId of toDelete) {
             const response = await fetch(`/api/drone/remove/${instanceId}`, {
                 method: 'DELETE'
             });
-            
+
             if (response.ok) {
                 // Remove from DOM
                 document.getElementById('component-' + instanceId)?.remove();
-                
+
                 // Remove from hierarchy
                 const hierarchyNode = document.querySelector(`[data-node-id="${instanceId}"]`);
                 if (hierarchyNode) hierarchyNode.remove();
-                
+
                 // Remove from state
                 Studio.placedComponents = Studio.placedComponents.filter(
                     p => p.instanceId !== instanceId
@@ -1197,11 +1197,11 @@ async function deleteSelected() {
                 deletedCount++;
             }
         }
-        
+
         // Clear selection
         Studio.selectedComponent = null;
         Studio.selectedComponents = [];
-        
+
         updateMonitors();
         updateComponentCount();
     } catch (error) {
@@ -1222,13 +1222,13 @@ function rotateSelected() {
 // Select all components on canvas
 function selectAllComponents() {
     clearSelection();
-    
+
     document.querySelectorAll('.placed-component').forEach(el => {
         el.classList.add('selected');
         const instanceId = el.id.replace('component-', '');
         Studio.selectedComponents.push(instanceId);
     });
-    
+
     if (Studio.selectedComponents.length > 0) {
         Studio.selectedComponent = Studio.selectedComponents[0];
     }
@@ -1328,16 +1328,16 @@ function initBlocksDragDrop() {
 function onBlockDragStart(e) {
     const blockEl = e.target.closest('.code-block');
     if (!blockEl) return;
-    
+
     draggedBlock = {
         type: blockEl.dataset.blockType,
-        category: Array.from(blockEl.classList).find(c => 
+        category: Array.from(blockEl.classList).find(c =>
             ['motion', 'events', 'control', 'sensing', 'operators', 'variables'].includes(c)
         ),
         text: blockEl.innerText.trim(),
         innerHTML: blockEl.innerHTML
     };
-    
+
     e.dataTransfer.setData('text/plain', draggedBlock.type);
     e.dataTransfer.effectAllowed = 'copy';
 }
@@ -1353,14 +1353,14 @@ function onWorkspaceDragOver(e) {
 
 function onWorkspaceDrop(e) {
     e.preventDefault();
-    
+
     if (!draggedBlock) return;
-    
+
     const workspace = document.getElementById('codeWorkspaceInner');
     const rect = workspace.getBoundingClientRect();
     const x = e.clientX - rect.left + workspace.parentElement.scrollLeft;
     const y = e.clientY - rect.top + workspace.parentElement.scrollTop;
-    
+
     // Create dropped block
     const blockId = 'block-' + Date.now();
     const block = document.createElement('div');
@@ -1370,23 +1370,23 @@ function onWorkspaceDrop(e) {
     block.style.left = x + 'px';
     block.style.top = y + 'px';
     block.innerHTML = draggedBlock.innerHTML;
-    
+
     // Make it movable
     block.addEventListener('mousedown', startBlockDrag);
     block.addEventListener('click', (e) => selectBlock(e, blockId));
-    
+
     workspace.appendChild(block);
-    
+
     Studio.droppedBlocks.push({
         id: blockId,
         type: draggedBlock.type,
         x: x,
         y: y
     });
-    
+
     log('info', `Added block: ${draggedBlock.type}`);
     updateGeneratedCode();
-    
+
     draggedBlock = null;
 }
 
@@ -1480,7 +1480,7 @@ function onBlockDrag(e) {
     if (deleteZone) {
         const deleteRect = deleteZone.getBoundingClientRect();
         const isOverDelete = e.clientX >= deleteRect.left && e.clientX <= deleteRect.right &&
-                            e.clientY >= deleteRect.top && e.clientY <= deleteRect.bottom;
+            e.clientY >= deleteRect.top && e.clientY <= deleteRect.bottom;
         deleteZone.classList.toggle('hover', isOverDelete);
     }
 }
@@ -1525,16 +1525,16 @@ document.addEventListener('keydown', (e) => {
 function updateGeneratedCode() {
     const editor = document.getElementById('codeEditor');
     if (!editor) return;
-    
+
     let code = '// Generated from visual blocks\n\nasync function runDrone() {\n';
-    
+
     // Sort blocks by Y position
     const sorted = [...Studio.droppedBlocks].sort((a, b) => a.y - b.y);
-    
+
     sorted.forEach(block => {
         const el = document.getElementById(block.id);
         const value = el?.querySelector('input')?.value || '10';
-        
+
         switch (block.type) {
             case 'takeoff':
                 code += '    await drone.takeoff();\n';
@@ -1568,7 +1568,7 @@ function updateGeneratedCode() {
                 break;
         }
     });
-    
+
     code += '}\n';
     editor.value = code;
 }
@@ -1588,54 +1588,54 @@ async function updateMonitors() {
 
 function updateMonitorsWithResult(result) {
     if (!result) return;
-    
+
     document.getElementById('monitorWeight').textContent = (result.totalWeight || 0).toFixed(1) + ' g';
     document.getElementById('monitorThrust').textContent = (result.totalThrust || 0).toFixed(2) + ' kg';
     document.getElementById('monitorRatio').textContent = (result.thrustToWeightRatio || 0).toFixed(2) + ':1';
     document.getElementById('monitorPower').textContent = (result.totalPowerConsumption || 0).toFixed(1) + ' W';
     document.getElementById('monitorCapacity').textContent = (result.batteryCapacity || 0).toFixed(0) + ' mAh';
     document.getElementById('monitorFlightTime').textContent = (result.estimatedFlightTime || 0).toFixed(1) + ' min';
-    
+
     const badge = document.getElementById('monitorCapability');
     const capability = result.flightCapability || 'N/A';
     badge.textContent = capability;
     badge.className = 'monitor-value badge ' + (
         capability === 'Cannot fly' ? 'bg-danger' :
-        capability === 'Marginal' ? 'bg-warning' : 
-        capability === 'Good' ? 'bg-success' : 'bg-secondary'
+            capability === 'Marginal' ? 'bg-warning' :
+                capability === 'Good' ? 'bg-success' : 'bg-secondary'
     );
-    
+
     // Diagnostics
     const diagList = document.getElementById('diagnosticsList');
     diagList.innerHTML = '';
-    
+
     if (result.errors?.length) {
         result.errors.forEach(err => {
             diagList.innerHTML += `<div class="diagnostic-item error"><i class="bi bi-x-circle"></i>${err}</div>`;
         });
     }
-    
+
     if (result.warnings?.length) {
         result.warnings.forEach(warn => {
             diagList.innerHTML += `<div class="diagnostic-item warning"><i class="bi bi-exclamation-triangle"></i>${warn}</div>`;
         });
     }
-    
+
     if (result.isValid && !result.warnings?.length && !result.errors?.length) {
         diagList.innerHTML = `<div class="diagnostic-item success"><i class="bi bi-check-circle"></i>Config valid</div>`;
     }
-    
+
     if (!result.errors?.length && !result.warnings?.length && !result.isValid) {
         diagList.innerHTML = `<div class="diagnostic-item"><i class="bi bi-info-circle"></i>Add components to start</div>`;
     }
-    
+
     // Weight breakdown
     const total = result.totalWeight || 1;
     const frameEl = document.querySelector('.bar-segment.frame');
     const motorsEl = document.querySelector('.bar-segment.motors');
     const batteryEl = document.querySelector('.bar-segment.battery');
     const otherEl = document.querySelector('.bar-segment.other');
-    
+
     if (frameEl) frameEl.style.width = ((result.frameWeight || 0) / total * 100) + '%';
     if (motorsEl) motorsEl.style.width = ((result.motorsWeight || 0) / total * 100) + '%';
     if (batteryEl) batteryEl.style.width = ((result.batteryWeight || 0) / total * 100) + '%';
@@ -1653,35 +1653,35 @@ function initKeyboard() {
             undo();
             return;
         }
-        
+
         // Redo: Ctrl+Y or Ctrl+Shift+Z
         if ((e.ctrlKey && e.key === 'y') || (e.ctrlKey && e.shiftKey && e.key === 'Z')) {
             e.preventDefault();
             redo();
             return;
         }
-        
+
         // Save: Ctrl+S
         if (e.ctrlKey && e.key === 's') {
             e.preventDefault();
             saveProject();
             return;
         }
-        
+
         // Select All: Ctrl+A (when not in input)
         if (e.ctrlKey && e.key === 'a' && !isInput()) {
             e.preventDefault();
             selectAllComponents();
             return;
         }
-        
+
         // Duplicate: Ctrl+D
         if (e.ctrlKey && e.key === 'd' && !isInput()) {
             e.preventDefault();
             duplicateSelected();
             return;
         }
-        
+
         // Delete
         if (e.key === 'Delete' || e.key === 'Backspace') {
             if ((Studio.selectedComponent || Studio.selectedComponents.length > 0) && !isInput()) {
@@ -1689,19 +1689,19 @@ function initKeyboard() {
                 deleteSelected();
             }
         }
-        
+
         // Escape - deselect
         if (e.key === 'Escape') {
             clearSelection();
             hideContextMenu();
         }
-        
+
         // Space - play/pause
         if (e.key === ' ' && !isInput()) {
             e.preventDefault();
             togglePlay();
         }
-        
+
         // Arrow keys - move selected component(s)
         if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
             const hasSelection = Studio.selectedComponents.length > 0 || Studio.selectedComponent;
@@ -1721,17 +1721,17 @@ function pushHistory(action) {
     if (Studio.historyIndex < Studio.history.length - 1) {
         Studio.history = Studio.history.slice(0, Studio.historyIndex + 1);
     }
-    
+
     // Add new action
     Studio.history.push(action);
     Studio.historyIndex = Studio.history.length - 1;
-    
+
     // Limit history size
     if (Studio.history.length > Studio.maxHistory) {
         Studio.history.shift();
         Studio.historyIndex--;
     }
-    
+
     updateUndoRedoUI();
 }
 
@@ -1740,22 +1740,22 @@ async function undo() {
         log('info', 'Nothing to undo');
         return;
     }
-    
+
     const action = Studio.history[Studio.historyIndex];
     Studio.historyIndex--;
-    
+
     try {
         switch (action.type) {
             case 'place':
                 // Undo place = remove
                 await removeComponentById(action.instanceId);
                 break;
-                
+
             case 'move':
                 // Undo move = move back
                 await moveComponentTo(action.instanceId, action.oldGridX, action.oldGridY);
                 break;
-                
+
             case 'delete':
                 // Undo delete = re-place (complex, may need server support)
                 // For now, just log
@@ -1765,7 +1765,7 @@ async function undo() {
     } catch (error) {
         log('error', 'Undo failed');
     }
-    
+
     updateUndoRedoUI();
 }
 
@@ -1774,23 +1774,23 @@ async function redo() {
         log('info', 'Nothing to redo');
         return;
     }
-    
+
     Studio.historyIndex++;
     const action = Studio.history[Studio.historyIndex];
-    
+
     try {
         switch (action.type) {
             case 'place':
                 // Redo place = place again (would need full data)
                 log('warning', 'Redo place not fully supported yet');
                 break;
-                
+
             case 'move':
                 // Redo move = move forward
                 await moveComponentTo(action.instanceId, action.newGridX, action.newGridY);
                 log('info', 'Redo: Moved ' + action.name);
                 break;
-                
+
             case 'delete':
                 // Redo delete = delete again
                 await removeComponentById(action.instanceId);
@@ -1799,7 +1799,7 @@ async function redo() {
     } catch (error) {
         log('error', 'Redo failed');
     }
-    
+
     updateUndoRedoUI();
 }
 
@@ -1809,14 +1809,14 @@ async function moveComponentTo(instanceId, gridX, gridY) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ instanceId, gridX, gridY })
     });
-    
+
     if (response.ok) {
         const el = document.getElementById('component-' + instanceId);
         if (el) {
             el.style.left = (gridX * Studio.gridCellSize) + 'px';
             el.style.top = (gridY * Studio.gridCellSize) + 'px';
         }
-        
+
         const placed = Studio.placedComponents.find(c => c.instanceId === instanceId);
         if (placed) {
             placed.gridX = gridX;
@@ -1827,11 +1827,11 @@ async function moveComponentTo(instanceId, gridX, gridY) {
 
 async function removeComponentById(instanceId) {
     const response = await fetch(`/api/drone/remove/${instanceId}`, { method: 'DELETE' });
-    
+
     if (response.ok) {
         const el = document.getElementById('component-' + instanceId);
         if (el) el.remove();
-        
+
         Studio.placedComponents = Studio.placedComponents.filter(c => c.instanceId !== instanceId);
         updateComponentCount();
         updateMonitors();
@@ -1845,12 +1845,12 @@ function updateUndoRedoUI() {
 
 function moveSelectedWithArrows(key, step) {
     // Get list of components to move
-    const toMove = Studio.selectedComponents.length > 0 
-        ? [...Studio.selectedComponents] 
+    const toMove = Studio.selectedComponents.length > 0
+        ? [...Studio.selectedComponents]
         : (Studio.selectedComponent ? [Studio.selectedComponent] : []);
-    
+
     if (toMove.length === 0) return;
-    
+
     // Calculate delta
     let deltaX = 0, deltaY = 0;
     switch (key) {
@@ -1859,29 +1859,29 @@ function moveSelectedWithArrows(key, step) {
         case 'ArrowLeft': deltaX = -step; break;
         case 'ArrowRight': deltaX = step; break;
     }
-    
+
     // Track old positions for undo
     const moveInfo = [];
-    
+
     // Update all selected components
     toMove.forEach(instanceId => {
         const el = document.getElementById('component-' + instanceId);
         const placed = Studio.placedComponents.find(c => c.instanceId === instanceId);
-        
+
         if (el && placed) {
             const oldX = placed.gridX;
             const oldY = placed.gridY;
             const newX = Math.max(0, placed.gridX + deltaX);
             const newY = Math.max(0, placed.gridY + deltaY);
-            
+
             // Update visual
             el.style.left = (newX * Studio.gridCellSize) + 'px';
             el.style.top = (newY * Studio.gridCellSize) + 'px';
-            
+
             // Update state
             placed.gridX = newX;
             placed.gridY = newY;
-            
+
             moveInfo.push({
                 instanceId,
                 name: placed.name,
@@ -1892,7 +1892,7 @@ function moveSelectedWithArrows(key, step) {
             });
         }
     });
-    
+
     // Save to server (debounced)
     clearTimeout(Studio.arrowMoveTimeout);
     Studio.arrowMoveTimeout = setTimeout(async () => {
@@ -1901,14 +1901,14 @@ function moveSelectedWithArrows(key, step) {
             await fetch('/api/drone/update', {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 
-                    instanceId: info.instanceId, 
-                    gridX: info.newGridX, 
-                    gridY: info.newGridY 
+                body: JSON.stringify({
+                    instanceId: info.instanceId,
+                    gridX: info.newGridX,
+                    gridY: info.newGridY
                 })
             });
         }
-        
+
         // Save to history
         if (moveInfo.length === 1) {
             pushHistory({
@@ -1944,16 +1944,16 @@ function toggleNode(el) {
 function selectHierarchyNode(nodeId, event) {
     if (event) event.stopPropagation();
     if (nodeId === 'root') return;
-    
+
     // Deselect all
     document.querySelectorAll('.hierarchy-node-content').forEach(el => {
         el.classList.remove('selected');
     });
-    
+
     // Select this node
     const node = document.querySelector(`[data-node-id="${nodeId}"] > .hierarchy-node-content`);
     if (node) node.classList.add('selected');
-    
+
     // Also select on canvas
     Studio.selectedComponent = nodeId;
     document.querySelectorAll('.placed-component').forEach(el => {
@@ -1968,31 +1968,31 @@ async function deleteFromHierarchy(nodeId, event) {
         event.stopPropagation();
         event.preventDefault();
     }
-    
+
     if (!nodeId || nodeId === 'root') return;
-    
+
     try {
         const response = await fetch(`/api/drone/remove/${nodeId}`, {
             method: 'DELETE'
         });
-        
+
         if (response.ok) {
             // Remove from canvas
             document.getElementById('component-' + nodeId)?.remove();
-            
+
             // Remove from hierarchy tree
             const hierarchyNode = document.querySelector(`[data-node-id="${nodeId}"]`);
             if (hierarchyNode) hierarchyNode.remove();
-            
+
             // Update state
             Studio.placedComponents = Studio.placedComponents.filter(
                 p => p.instanceId !== nodeId
             );
-            
+
             if (Studio.selectedComponent === nodeId) {
                 Studio.selectedComponent = null;
             }
-            
+
             updateMonitors();
             updateComponentCount();
         } else {
@@ -2016,7 +2016,7 @@ async function refreshHierarchy() {
 
 function addToHierarchy(instanceId, componentName, componentType, parentId = 'root') {
     let targetChildren;
-    
+
     if (parentId && parentId !== 'root') {
         targetChildren = document.querySelector(`[data-node-id="${parentId}"] > .hierarchy-children`);
         if (!targetChildren) {
@@ -2029,10 +2029,10 @@ function addToHierarchy(instanceId, componentName, componentType, parentId = 'ro
             }
         }
     }
-    
+
     if (!targetChildren) {
         targetChildren = document.querySelector('[data-node-id="root"] > .hierarchy-children');
-        
+
         // Create children container for root if not exists
         if (!targetChildren) {
             const root = document.querySelector('[data-node-id="root"]');
@@ -2043,16 +2043,16 @@ function addToHierarchy(instanceId, componentName, componentType, parentId = 'ro
             }
         }
     }
-    
+
     if (!targetChildren) {
         console.error('Could not find hierarchy children container');
         return;
     }
-    
+
     // Make sure container is expanded
     targetChildren.classList.remove('collapsed');
     targetChildren.classList.add('expanded');
-    
+
     const nodeHtml = `
         <div class="hierarchy-node" data-node-id="${instanceId}" data-is-layer="false"
              ondragover="onHierarchyDragOver(event)"
@@ -2081,14 +2081,14 @@ let layerCounter = 1;
 async function addNewLayer() {
     const name = prompt('Enter layer name:', `Layer ${layerCounter}`);
     if (!name) return;
-    
+
     try {
         const response = await fetch('/api/drone/hierarchy/layer', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name: name, parentId: 'root' })
         });
-        
+
         if (response.ok) {
             const layer = await response.json();
             addLayerToHierarchy(layer);
@@ -2115,10 +2115,10 @@ function addLayerToHierarchy(layer) {
         }
         return;
     }
-    
+
     rootChildren.classList.remove('collapsed');
     rootChildren.classList.add('expanded');
-    
+
     const nodeHtml = `
         <div class="hierarchy-node is-layer has-children" data-node-id="${layer.id}" data-is-layer="true"
              ondragover="onHierarchyDragOver(event)"
@@ -2147,23 +2147,23 @@ async function deleteLayerFromHierarchy(layerId, event) {
         event.stopPropagation();
         event.preventDefault();
     }
-    
+
     try {
         const response = await fetch(`/api/drone/hierarchy/layer/${layerId}`, {
             method: 'DELETE'
         });
-        
+
         if (response.ok) {
             // Move children to parent and remove layer node
             const layerNode = document.querySelector(`[data-node-id="${layerId}"]`);
             if (layerNode) {
                 const children = layerNode.querySelectorAll(':scope > .hierarchy-children > .hierarchy-node');
                 const rootChildren = document.querySelector('[data-node-id="root"] > .hierarchy-children');
-                
+
                 children.forEach(child => {
                     rootChildren?.appendChild(child);
                 });
-                
+
                 layerNode.remove();
             }
         }
@@ -2181,7 +2181,7 @@ function onHierarchyDragStart(event, nodeId) {
     draggedHierarchyNodeId = nodeId;
     event.dataTransfer.setData('text/plain', nodeId);
     event.dataTransfer.effectAllowed = 'move';
-    
+
     // Add visual feedback
     setTimeout(() => {
         event.target.closest('.hierarchy-node')?.classList.add('dragging');
@@ -2191,13 +2191,13 @@ function onHierarchyDragStart(event, nodeId) {
 function onHierarchyDragOver(event) {
     event.preventDefault();
     event.dataTransfer.dropEffect = 'move';
-    
+
     const node = event.target.closest('.hierarchy-node');
     if (node) {
         // Only allow dropping on layers or root
         const isLayer = node.dataset.isLayer === 'true';
         const isRoot = node.dataset.nodeId === 'root';
-        
+
         if (isLayer || isRoot) {
             document.querySelectorAll('.hierarchy-node.drag-over').forEach(n => n.classList.remove('drag-over'));
             node.classList.add('drag-over');
@@ -2214,33 +2214,33 @@ function onHierarchyDragEnd(event) {
 async function onHierarchyDrop(event, targetId) {
     event.preventDefault();
     event.stopPropagation();
-    
+
     document.querySelectorAll('.hierarchy-node.drag-over').forEach(n => n.classList.remove('drag-over'));
     document.querySelectorAll('.hierarchy-node.dragging').forEach(n => n.classList.remove('dragging'));
-    
+
     const nodeId = draggedHierarchyNodeId || event.dataTransfer.getData('text/plain');
-    
+
     if (!nodeId || nodeId === targetId) return;
-    
+
     // Don't allow dropping on itself or its children
     const targetNode = document.querySelector(`[data-node-id="${targetId}"]`);
     if (targetNode?.querySelector(`[data-node-id="${nodeId}"]`)) {
         log('warning', 'Cannot move to own child');
         return;
     }
-    
+
     try {
         const response = await fetch('/api/drone/hierarchy/move', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ nodeId: nodeId, newParentId: targetId })
         });
-        
+
         if (response.ok) {
             // Move DOM element
             const draggedNode = document.querySelector(`[data-node-id="${nodeId}"]`);
             let targetChildren = document.querySelector(`[data-node-id="${targetId}"] > .hierarchy-children`);
-            
+
             // Create children container if not exists
             if (!targetChildren) {
                 const target = document.querySelector(`[data-node-id="${targetId}"]`);
@@ -2248,7 +2248,7 @@ async function onHierarchyDrop(event, targetId) {
                 targetChildren.className = 'hierarchy-children expanded';
                 target.appendChild(targetChildren);
             }
-            
+
             if (draggedNode && targetChildren) {
                 targetChildren.appendChild(draggedNode);
                 targetChildren.classList.remove('collapsed');
@@ -2260,7 +2260,7 @@ async function onHierarchyDrop(event, targetId) {
     } catch (error) {
         log('error', 'Failed to move: ' + error.message);
     }
-    
+
     draggedHierarchyNodeId = null;
 }
 
@@ -2275,11 +2275,11 @@ async function newProject() {
         document.getElementById('gridOverlay').innerHTML = '';
         document.getElementById('codeWorkspaceInner').innerHTML = '';
         document.getElementById('codeEditor').value = '';
-        
+
         // Clear hierarchy except root
         const rootChildren = document.querySelector('[data-node-id="root"] > .hierarchy-children');
         if (rootChildren) rootChildren.innerHTML = '';
-        
+
         updateMonitors();
         updateComponentCount();
     }

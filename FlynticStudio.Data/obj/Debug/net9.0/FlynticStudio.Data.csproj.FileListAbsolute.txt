@@ -20,3 +20,4 @@
 /home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Data/obj/Debug/net9.0/refint/FlynticStudio.Data.dll
 /home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Data/obj/Debug/net9.0/FlynticStudio.Data.pdb
 /home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Data/obj/Debug/net9.0/ref/FlynticStudio.Data.dll
+/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Data/obj/Debug/net9.0/FlynticStudio.Data.sourcelink.json

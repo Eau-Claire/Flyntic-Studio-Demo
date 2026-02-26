@@ -59,7 +59,6 @@
 /home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/FlynticStudio.Web.RazorAssemblyInfo.cache
 /home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/FlynticStudio.Web.RazorAssemblyInfo.cs
 /home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/scopedcss/bundle/FlynticStudio.Web.styles.css
-/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/j0keyd6vp1-dimk3vlw6r.gz
 /home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/jnh1g3l82h-a8sp2c0nyl.gz
 /home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/staticwebassets.build.json
 /home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/staticwebassets.development.json
@@ -76,3 +75,8 @@
 /home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/FlynticStudio.Web.pdb
 /home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/FlynticStudio.Web.genruntimeconfig.cache
 /home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/ref/FlynticStudio.Web.dll
+/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/FlynticStudio.Web.sourcelink.json
+/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/j0keyd6vp1-jf9z4ygdv6.gz
+/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/u60hip09b9-7973lh4x3l.gz
+/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/f1apxyxmcu-f9gk141a01.gz
+/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/Debug/net9.0/compressed/mvnm7ryghu-0icd61f91r.gz

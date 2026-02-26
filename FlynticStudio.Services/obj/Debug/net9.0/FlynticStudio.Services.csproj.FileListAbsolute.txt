@@ -28,3 +28,4 @@
 /home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Services/obj/Debug/net9.0/refint/FlynticStudio.Services.dll
 /home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Services/obj/Debug/net9.0/FlynticStudio.Services.pdb
 /home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Services/obj/Debug/net9.0/ref/FlynticStudio.Services.dll
+/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Services/obj/Debug/net9.0/FlynticStudio.Services.sourcelink.json
