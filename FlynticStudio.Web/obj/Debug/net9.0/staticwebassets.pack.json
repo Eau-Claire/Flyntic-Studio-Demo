@@ -5,8 +5,20 @@
       "PackagePath": "staticwebassets/css/site.css"
     },
     {
+      "Id": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/wwwroot/js/dragInteraction.js",
+      "PackagePath": "staticwebassets/js/dragInteraction.js"
+    },
+    {
       "Id": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/wwwroot/js/drone-studio.js",
       "PackagePath": "staticwebassets/js/drone-studio.js"
+    },
+    {
+      "Id": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/wwwroot/js/main.js",
+      "PackagePath": "staticwebassets/js/main.js"
+    },
+    {
+      "Id": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/wwwroot/js/threeScene.js",
+      "PackagePath": "staticwebassets/js/threeScene.js"
     },
     {
       "Id": "obj/Debug/net9.0/staticwebassets/msbuild.FlynticStudio.Web.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
