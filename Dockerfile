@@ -1,27 +1,32 @@
-# ===== BUILD STAGE =====
+# =========================
+# BUILD STAGE
+# =========================
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 
-COPY FlynticStudio.sln .
-COPY FlynticStudio.Web/FlynticStudio.Web.csproj FlynticStudio.Web/
-COPY FlynticStudio.Services/FlynticStudio.Services.csproj FlynticStudio.Services/
-COPY FlynticStudio.Data/FlynticStudio.Data.csproj FlynticStudio.Data/
-
-RUN dotnet restore
-
+# Copy toàn bộ source
 COPY . .
 
-WORKDIR /src/FlynticStudio.Web
-RUN dotnet publish -c Release -o /app/publish
+# Restore riêng project Web để nhẹ RAM hơn
+RUN dotnet restore FlynticStudio.Web/FlynticStudio.Web.csproj
 
-# ===== RUNTIME STAGE =====
+# Publish tối ưu memory
+RUN dotnet publish FlynticStudio.Web/FlynticStudio.Web.csproj \
+    -c Release \
+    -o /app/publish \
+    --no-restore \
+    /p:UseAppHost=false \
+    /p:PublishTrimmed=false
+
+# =========================
+# RUNTIME STAGE
+# =========================
 FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /app
 
 COPY --from=build /app/publish .
 
+# Render inject biến PORT
 ENV ASPNETCORE_URLS=http://+:$PORT
-
-EXPOSE 10000
 
 ENTRYPOINT ["dotnet", "FlynticStudio.Web.dll"]
