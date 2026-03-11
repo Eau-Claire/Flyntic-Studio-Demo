@@ -89,6 +89,16 @@ export class DragInteraction {
     }
 
     onPointerDown(event) {
+        // Nếu đang simulation thì không cho phép chọn, highlight, hoặc thao tác lên component
+        if ((window.Studio && window.Studio.simulationState === 'playing') || (window.threeScene && window.threeScene.isPlaying)) {
+            // Chỉ cho phép điều khiển camera (OrbitControls)
+            this.transformControls.detach();
+            this.highlightBox.visible = false;
+            if (this.onComponentSelected) {
+                this.onComponentSelected(null);
+            }
+            return;
+        }
         // If it's a right click or we are clicking exactly on the TransformControls gizmo, do nothing
         if (event.button !== 0 || this.transformControls.dragging) return;
 
@@ -147,6 +157,8 @@ export class DragInteraction {
     }
 
     onDragOver(event) {
+        // Nếu đang simulation thì không cho phép dragover
+        if ((window.Studio && window.Studio.simulationState === 'playing') || (window.threeScene && window.threeScene.isPlaying)) return;
         event.preventDefault();
         event.dataTransfer.dropEffect = 'copy';
         this.updateMouse(event);
@@ -178,6 +190,8 @@ export class DragInteraction {
     }
 
     onDrop(event) {
+        // Nếu đang simulation thì không cho phép drop
+        if ((window.Studio && window.Studio.simulationState === 'playing') || (window.threeScene && window.threeScene.isPlaying)) return;
         event.preventDefault();
         this.updateMouse(event);
 

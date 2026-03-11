@@ -182,6 +182,11 @@ function handleComponentSelected(instanceId) {
 // Override deleteSelected globally so it deletes from ThreeJS as well
 const originalDeleteSelected = window.deleteSelected;
 window.deleteSelected = async function () {
+    // Chặn xóa khi simulation đang chạy
+    if ((window.Studio && window.Studio.simulationState === 'playing') || (window.threeScene && window.threeScene.isPlaying)) {
+        if (window.log) window.log('error', 'Không thể xóa/tháo component khi đang chạy simulation!');
+        return;
+    }
     const toDelete = window.Studio?.selectedComponents.length > 0
         ? [...window.Studio.selectedComponents]
         : (window.Studio?.selectedComponent ? [window.Studio.selectedComponent] : []);
@@ -214,34 +219,78 @@ window.toggleWiringMode = function () {
     if (!dragInteraction) return;
     dragInteraction.wiringMode = !dragInteraction.wiringMode;
     const btn = document.getElementById('btnWiring');
-
+    const zoomView = document.getElementById('wiringZoomView');
     if (dragInteraction.wiringMode) {
         btn.classList.replace('btn-outline-info', 'btn-info');
         if (window.log) window.log('info', 'Wiring Mode: Click two components to connect');
         firstWiringComponent = null;
+        if (zoomView) zoomView.style.display = 'block';
     } else {
         btn.classList.replace('btn-info', 'btn-outline-info');
         if (window.log) window.log('info', 'Wiring Mode disabled');
+        if (zoomView) zoomView.style.display = 'none';
     }
 }
 
 function handleWiringComponentSelected(instanceId) {
+    // Chặn wiring khi simulation đang chạy
+    if ((window.Studio && window.Studio.simulationState === 'playing') || (window.threeScene && window.threeScene.isPlaying)) {
+        if (window.log) window.log('error', 'Không thể kết nối/ngắt kết nối khi đang chạy simulation!');
+        return;
+    }
+    const zoomView = document.getElementById('wiringZoomView');
+    const zoomWarning = document.getElementById('wiringZoomWarning');
+    const zoomWarningText = document.getElementById('wiringZoomWarningText');
     if (!firstWiringComponent) {
         firstWiringComponent = instanceId;
         if (window.log) window.log('info', 'Selected first component. Select another to connect/disconnect.');
+        // Zoom vào component đầu tiên
+        if (zoomView) {
+            zoomView.style.display = 'block';
+            // Tìm mesh và port, focus camera hoặc highlight port (giản lược: highlight mesh)
+            const mesh = threeScene.meshes[instanceId];
+            if (mesh) {
+                // Tạo hiệu ứng highlight hoặc zoom camera (giản lược: highlight bằng box)
+                threeScene.controls.target.copy(mesh.position);
+                threeScene.camera.position.lerp(mesh.position.clone().add(new THREE.Vector3(2,2,2)), 0.5);
+                // TODO: Có thể render phụ vào wiringZoomCanvas nếu muốn tách view
+            }
+        }
+        if (zoomWarning) zoomWarning.style.display = 'none';
     } else {
         if (firstWiringComponent === instanceId) {
             firstWiringComponent = null;
             if (window.log) window.log('info', 'Selection cleared');
+            if (zoomWarning) zoomWarning.style.display = 'none';
             return;
         }
-
+        // Kiểm tra hợp lệ port
+        const meshA = threeScene.meshes[firstWiringComponent];
+        const meshB = threeScene.meshes[instanceId];
+        let valid = false;
+        if (meshA && meshB) {
+            // Kiểm tra allowed port
+            const portsA = meshA.userData.ports || [];
+            const portsB = meshB.userData.ports || [];
+            valid = portsA.some(port => port.allowed && port.allowed.includes(meshB.userData.type)) ||
+                    portsB.some(port => port.allowed && port.allowed.includes(meshA.userData.type));
+        }
+        if (!valid) {
+            // Hiện cảnh báo và dấu chấm than
+            if (zoomWarning) {
+                zoomWarning.style.display = 'block';
+                zoomWarningText.textContent = 'Không thể nối: Chọn đúng loại port/ổ!';
+            }
+            if (window.log) window.log('error', 'Không thể nối: Chọn đúng loại port/ổ!');
+            return;
+        } else {
+            if (zoomWarning) zoomWarning.style.display = 'none';
+        }
         // Check if wire already exists
         const wireExists = threeScene.wiresGroup.children.some(w =>
             (w.userData.fromId === firstWiringComponent && w.userData.toId === instanceId) ||
             (w.userData.fromId === instanceId && w.userData.toId === firstWiringComponent)
         );
-
         if (wireExists) {
             threeScene.removeWire(firstWiringComponent, instanceId);
             if (window.Studio) {
@@ -260,6 +309,7 @@ function handleWiringComponentSelected(instanceId) {
             if (window.log) window.log('success', 'Connected components');
         }
         firstWiringComponent = null;
+        if (zoomWarning) zoomWarning.style.display = 'none';
     }
 }
 

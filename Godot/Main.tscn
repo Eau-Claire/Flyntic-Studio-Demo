@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c8x4j5m3k3p6"]
+[gd_scene load_steps=13 format=3 uid="uid://c8x4j5m3k3p6"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_main"]
 
@@ -30,8 +30,8 @@ background_mode = 2
 sky = SubResource("sky")
 ambient_light_source = 3
 ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 1.0
-tonemap_mode = 3
+ambient_light_energy = 0.8
+tonemap_mode = 2
 tonemap_exposure = 1.0
 glow_enabled = false
 
@@ -50,6 +50,28 @@ content_margin_left = 12.0
 content_margin_right = 12.0
 content_margin_top = 6.0
 content_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="sbf_block_events"]
+bg_color = Color(0.85, 0.65, 0.0, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id="sbf_block_motion"]
+bg_color = Color(0.2, 0.5, 0.85, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="sbf_block_control"]
+bg_color = Color(0.85, 0.55, 0.1, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [sub_resource type="StyleBoxFlat" id="sbf_cat_btn"]
 bg_color = Color(0.13, 0.13, 0.15, 1)
@@ -72,13 +94,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_main")
 
-[node name="BG" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 theme_override_styles/panel = SubResource("sbf_bg")
 
 ; ===== MAIN VERTICAL SPLIT: TopBar | Content | StatusBar =====
@@ -166,38 +181,11 @@ text = "Help"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="WiringBtn" type="Button" parent="Root/TopBar/H"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.12, 0.58, 0.95, 1)
-theme_override_font_sizes/font_size = 12
-text = "Wiring"
-flat = true
-
-[node name="SimControls" type="HBoxContainer" parent="Root/TopBar/H"]
-layout_mode = 2
-theme_override_constants/separation = 8
-
-[node name="Play" type="Button" parent="Root/TopBar/H/SimControls"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.3, 0.8, 0.4, 1)
-text = "▶"
-flat = true
-
-[node name="Pause" type="Button" parent="Root/TopBar/H/SimControls"]
-layout_mode = 2
-text = "II"
-flat = true
-
-[node name="Stop" type="Button" parent="Root/TopBar/H/SimControls"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.95, 0.25, 0.2, 1)
-text = "■"
-flat = true
-
 [node name="Status" type="Label" parent="Root/TopBar/H"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.55, 0.55, 0.55, 1)
+theme_override_colors/font_color = Color(0.65, 0.65, 0.65, 1)
 theme_override_font_sizes/font_size = 11
+text = "Ready"
 text = "stopped"
 
 ; ----- CONTENT (Left | Center+Right) -----
@@ -330,8 +318,8 @@ environment = SubResource("env")
 
 [node name="KeyLight" type="DirectionalLight3D" parent="Root/Content/CenterRight/Center/Tabs/Canvas/VPC/VP/Scene"]
 transform = Transform3D(-0.866, -0.433, 0.25, 0, 0.5, 0.866, -0.5, 0.75, -0.433, 10, 20, 10)
-light_energy = 0.5
-light_color = Color(0.95, 0.95, 1, 1)
+light_energy = 1.2
+light_color = Color(1, 1, 0.95, 1)
 shadow_enabled = true
 
 [node name="FillLight" type="OmniLight3D" parent="Root/Content/CenterRight/Center/Tabs/Canvas/VPC/VP/Scene"]
@@ -347,119 +335,207 @@ transform = Transform3D(1, 0, 0, 0, 0.866, 0.5, 0, -0.5, 0.866, 0, 5, 10)
 
 [node name="Components" type="Node3D" parent="Root/Content/CenterRight/Center/Tabs/Canvas/VPC/VP/Scene"]
 
+[node name="Wires" type="Node3D" parent="Root/Content/CenterRight/Center/Tabs/Canvas/VPC/VP/Scene/Components"]
+
 [node name="SnapHints" type="Node3D" parent="Root/Content/CenterRight/Center/Tabs/Canvas/VPC/VP/Scene"]
 
-[node name="Wires" type="Node3D" parent="Root/Content/CenterRight/Center/Tabs/Canvas/VPC/VP/Scene"]
-
-; -- Blocks Tab --
+; -- Blocks Tab (Scratch Style) --
 [node name="Blocks" type="Control" parent="Root/Content/CenterRight/Center/Tabs"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="H" type="HBoxContainer" parent="Root/Content/CenterRight/Center/Tabs/Blocks"]
+[node name="MainH" type="HBoxContainer" parent="Root/Content/CenterRight/Center/Tabs/Blocks"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 2
+theme_override_constants/separation = 0
 
-[node name="CatPanel" type="Panel" parent="Root/Content/CenterRight/Center/Tabs/Blocks/H"]
-custom_minimum_size = Vector2(90, 0)
+[node name="Sidebar" type="Panel" parent="Root/Content/CenterRight/Center/Tabs/Blocks/MainH"]
+custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("sbf_panel")
 
-[node name="V" type="VBoxContainer" parent="Root/Content/CenterRight/Center/Tabs/Blocks/H/CatPanel"]
+[node name="V" type="VBoxContainer" parent="Root/Content/CenterRight/Center/Tabs/Blocks/MainH/Sidebar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 8
-theme_override_constants/margin_left = 6
-theme_override_constants/margin_right = 6
-theme_override_constants/margin_top = 10
+theme_override_constants/separation = 4
 alignment = 1
 
-[node name="Events" type="Button" parent="Root/Content/CenterRight/Center/Tabs/Blocks/H/CatPanel/V"]
-custom_minimum_size = Vector2(0, 42)
+[node name="BtnE" type="Button" parent="Root/Content/CenterRight/Center/Tabs/Blocks/MainH/Sidebar/V"]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.7, 0.15, 1)
-theme_override_font_sizes/font_size = 10
-theme_override_styles/normal = SubResource("sbf_cat_btn")
-text = "Events"
+theme_override_colors/font_color = Color(1, 0.75, 0, 1)
+theme_override_font_sizes/font_size = 9
+text = "⚐
+Events"
+flat = true
 
-[node name="Motion" type="Button" parent="Root/Content/CenterRight/Center/Tabs/Blocks/H/CatPanel/V"]
-custom_minimum_size = Vector2(0, 42)
+[node name="BtnM" type="Button" parent="Root/Content/CenterRight/Center/Tabs/Blocks/MainH/Sidebar/V"]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.25, 0.55, 1, 1)
-theme_override_font_sizes/font_size = 10
-theme_override_styles/normal = SubResource("sbf_cat_btn")
-text = "Motion"
+theme_override_colors/font_color = Color(0.3, 0.6, 1, 1)
+theme_override_font_sizes/font_size = 9
+text = "✥
+Motion"
+flat = true
 
-[node name="Control" type="Button" parent="Root/Content/CenterRight/Center/Tabs/Blocks/H/CatPanel/V"]
-custom_minimum_size = Vector2(0, 42)
+[node name="BtnC" type="Button" parent="Root/Content/CenterRight/Center/Tabs/Blocks/MainH/Sidebar/V"]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.8, 0, 1)
-theme_override_font_sizes/font_size = 10
-theme_override_styles/normal = SubResource("sbf_cat_btn")
-text = "Control"
+theme_override_colors/font_color = Color(1, 0.65, 0.1, 1)
+theme_override_font_sizes/font_size = 9
+text = "⟳
+Control"
+flat = true
 
-[node name="Sensing" type="Button" parent="Root/Content/CenterRight/Center/Tabs/Blocks/H/CatPanel/V"]
-custom_minimum_size = Vector2(0, 42)
+[node name="Toolbox" type="Panel" parent="Root/Content/CenterRight/Center/Tabs/Blocks/MainH"]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.3, 0.8, 0.9, 1)
-theme_override_font_sizes/font_size = 10
-theme_override_styles/normal = SubResource("sbf_cat_btn")
-text = "Sensing"
+theme_override_styles/panel = SubResource("sbf_bg")
 
-[node name="Operators" type="Button" parent="Root/Content/CenterRight/Center/Tabs/Blocks/H/CatPanel/V"]
-custom_minimum_size = Vector2(0, 42)
+[node name="V" type="VBoxContainer" parent="Root/Content/CenterRight/Center/Tabs/Blocks/MainH/Toolbox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 15
+
+[node name="Title" type="Label" parent="Root/Content/CenterRight/Center/Tabs/Blocks/MainH/Toolbox/V"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.4, 0.8, 0.3, 1)
-theme_override_font_sizes/font_size = 10
-theme_override_styles/normal = SubResource("sbf_cat_btn")
-text = "Operators"
+theme_override_colors/font_color = Color(0.6, 0.6, 0.6, 1)
+theme_override_font_sizes/font_size = 11
+text = "EVENTS"
 
-[node name="Variables" type="Button" parent="Root/Content/CenterRight/Center/Tabs/Blocks/H/CatPanel/V"]
+[node name="b1" type="Panel" parent="Root/Content/CenterRight/Center/Tabs/Blocks/MainH/Toolbox/V"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme_override_styles/panel = SubResource("sbf_block_events")
+
+[node name="L" type="Label" parent="Root/Content/CenterRight/Center/Tabs/Blocks/MainH/Toolbox/V/b1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 11
+text = "When ⚐ clicked"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title2" type="Label" parent="Root/Content/CenterRight/Center/Tabs/Blocks/MainH/Toolbox/V"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.6, 0.6, 1)
+theme_override_font_sizes/font_size = 11
+text = "MOTION"
+
+[node name="bt1" type="Panel" parent="Root/Content/CenterRight/Center/Tabs/Blocks/MainH/Toolbox/V"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme_override_styles/panel = SubResource("sbf_block_motion")
+
+[node name="L" type="Label" parent="Root/Content/CenterRight/Center/Tabs/Blocks/MainH/Toolbox/V/bt1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 11
+text = "Take Off"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="bm1" type="Panel" parent="Root/Content/CenterRight/Center/Tabs/Blocks/MainH/Toolbox/V"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme_override_styles/panel = SubResource("sbf_block_motion")
+
+[node name="L" type="Label" parent="Root/Content/CenterRight/Center/Tabs/Blocks/MainH/Toolbox/V/bm1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 11
+text = "Forward [ 50 ] cm"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="bm2" type="Panel" parent="Root/Content/CenterRight/Center/Tabs/Blocks/MainH/Toolbox/V"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme_override_styles/panel = SubResource("sbf_block_motion")
+
+[node name="L" type="Label" parent="Root/Content/CenterRight/Center/Tabs/Blocks/MainH/Toolbox/V/bm2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 11
+text = "Hover (2s)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title3" type="Label" parent="Root/Content/CenterRight/Center/Tabs/Blocks/MainH/Toolbox/V"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.6, 0.6, 1)
+theme_override_font_sizes/font_size = 11
+text = "CONTROL"
+
+[node name="bl1" type="Panel" parent="Root/Content/CenterRight/Center/Tabs/Blocks/MainH/Toolbox/V"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme_override_styles/panel = SubResource("sbf_block_control")
+
+[node name="L" type="Label" parent="Root/Content/CenterRight/Center/Tabs/Blocks/MainH/Toolbox/V/bl1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 11
+text = "Land drone"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Workspace" type="Panel" parent="Root/Content/CenterRight/Center/Tabs/Blocks/MainH"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("sbf_panel")
+
+[node name="Grid" type="ColorRect" parent="Root/Content/CenterRight/Center/Tabs/Blocks/MainH/Workspace"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.12, 0.12, 0.14, 1)
+
+[node name="Variables" type="Button" parent="Root/Content/CenterRight/Center/Tabs/Blocks/MainH/Sidebar/V"]
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.4, 0.35, 1)
 theme_override_font_sizes/font_size = 10
 theme_override_styles/normal = SubResource("sbf_cat_btn")
 text = "Variables"
-
-[node name="GraphEdit" type="GraphEdit" parent="Root/Content/CenterRight/Center/Tabs/Blocks/H"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-; -- Code Tab --
-[node name="Code" type="Control" parent="Root/Content/CenterRight/Center/Tabs"]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 2
-
-[node name="Editor" type="CodeEdit" parent="Root/Content/CenterRight/Center/Tabs/Code"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/background_color = Color(0.03, 0.03, 0.04, 1)
-theme_override_font_sizes/font_size = 13
-text = "// Generated code will appear here
-// You can also write your own drone control code
-
-async function runDrone() {
-	await drone.takeoff();
-	await drone.moveUp(100);
-	await drone.hover(2000);
-	await drone.land();
-}"
 
 ; -- Console Panel --
 [node name="Console" type="Panel" parent="Root/Content/CenterRight/Center"]
