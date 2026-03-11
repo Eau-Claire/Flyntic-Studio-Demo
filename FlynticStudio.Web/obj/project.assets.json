@@ -51,11 +51,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/FlynticStudio.Web.csproj",
+      "projectUniqueName": "/home/minhchau/Documents/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/FlynticStudio.Web.csproj",
       "projectName": "FlynticStudio.Web",
-      "projectPath": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/FlynticStudio.Web.csproj",
+      "projectPath": "/home/minhchau/Documents/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/FlynticStudio.Web.csproj",
       "packagesPath": "/home/minhchau/.nuget/packages/",
-      "outputPath": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/",
+      "outputPath": "/home/minhchau/Documents/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Web/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/minhchau/.nuget/NuGet/NuGet.Config"
@@ -71,11 +71,11 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Data/FlynticStudio.Data.csproj": {
-              "projectPath": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Data/FlynticStudio.Data.csproj"
+            "/home/minhchau/Documents/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Data/FlynticStudio.Data.csproj": {
+              "projectPath": "/home/minhchau/Documents/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Data/FlynticStudio.Data.csproj"
             },
-            "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Services/FlynticStudio.Services.csproj": {
-              "projectPath": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Services/FlynticStudio.Services.csproj"
+            "/home/minhchau/Documents/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Services/FlynticStudio.Services.csproj": {
+              "projectPath": "/home/minhchau/Documents/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Services/FlynticStudio.Services.csproj"
             }
           }
         }

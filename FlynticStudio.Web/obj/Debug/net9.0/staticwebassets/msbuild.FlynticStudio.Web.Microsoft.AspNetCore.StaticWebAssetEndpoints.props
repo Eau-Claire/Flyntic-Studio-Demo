@@ -3,62 +3,62 @@
     <StaticWebAssetEndpoint Include="_content/FlynticStudio.Web/css/site.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-qXEyGeY2KpBkvrZcK4GrmmCwCr/Y1Kj\u002BYMb885O1NHM="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"25253"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022qXEyGeY2KpBkvrZcK4GrmmCwCr/Y1Kj\u002BYMb885O1NHM=\u0022"},{"Name":"Last-Modified","Value":"Thu, 26 Feb 2026 16:00:27 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-Re63/zTuWisKw6wZtonZfI5X9gSDwYg/0IPRfaeiC\u002B8="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"24993"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022Re63/zTuWisKw6wZtonZfI5X9gSDwYg/0IPRfaeiC\u002B8=\u0022"},{"Name":"Last-Modified","Value":"Sat, 28 Feb 2026 12:49:47 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/FlynticStudio.Web/css/site.llyu7s9yz8.css">
+    <StaticWebAssetEndpoint Include="_content/FlynticStudio.Web/css/site.tmlrogz35d.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"llyu7s9yz8"},{"Name":"integrity","Value":"sha256-qXEyGeY2KpBkvrZcK4GrmmCwCr/Y1Kj\u002BYMb885O1NHM="},{"Name":"label","Value":"_content/FlynticStudio.Web/css/site.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"25253"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022qXEyGeY2KpBkvrZcK4GrmmCwCr/Y1Kj\u002BYMb885O1NHM=\u0022"},{"Name":"Last-Modified","Value":"Thu, 26 Feb 2026 16:00:27 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"tmlrogz35d"},{"Name":"integrity","Value":"sha256-Re63/zTuWisKw6wZtonZfI5X9gSDwYg/0IPRfaeiC\u002B8="},{"Name":"label","Value":"_content/FlynticStudio.Web/css/site.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"24993"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022Re63/zTuWisKw6wZtonZfI5X9gSDwYg/0IPRfaeiC\u002B8=\u0022"},{"Name":"Last-Modified","Value":"Sat, 28 Feb 2026 12:49:47 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/FlynticStudio.Web/js/dragInteraction.1u0ztnr92i.js">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\dragInteraction.js'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"1u0ztnr92i"},{"Name":"integrity","Value":"sha256-\u002BddV4CkMvu4Qf7lxEjYuZWEDgx/9T0me0m7pd5mOn6g="},{"Name":"label","Value":"_content/FlynticStudio.Web/js/dragInteraction.js"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"9144"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022\u002BddV4CkMvu4Qf7lxEjYuZWEDgx/9T0me0m7pd5mOn6g=\u0022"},{"Name":"Last-Modified","Value":"Sat, 28 Feb 2026 15:42:07 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/FlynticStudio.Web/js/dragInteraction.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\dragInteraction.js'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-qffga1kwBxGfv49mqRCkDfGB\u002BegSVxl2JyfjXLts1sM="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"5340"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022qffga1kwBxGfv49mqRCkDfGB\u002BegSVxl2JyfjXLts1sM=\u0022"},{"Name":"Last-Modified","Value":"Thu, 26 Feb 2026 15:49:57 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/FlynticStudio.Web/js/dragInteraction.nknci1pq77.js">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\dragInteraction.js'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"nknci1pq77"},{"Name":"integrity","Value":"sha256-qffga1kwBxGfv49mqRCkDfGB\u002BegSVxl2JyfjXLts1sM="},{"Name":"label","Value":"_content/FlynticStudio.Web/js/dragInteraction.js"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"5340"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022qffga1kwBxGfv49mqRCkDfGB\u002BegSVxl2JyfjXLts1sM=\u0022"},{"Name":"Last-Modified","Value":"Thu, 26 Feb 2026 15:49:57 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/FlynticStudio.Web/js/drone-studio.b46u3gpzr5.js">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\drone-studio.js'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"b46u3gpzr5"},{"Name":"integrity","Value":"sha256-e\u002B3WOBGu41M4xV8RnXdOHrppQHrbxNWXGwV5GNjfPo8="},{"Name":"label","Value":"_content/FlynticStudio.Web/js/drone-studio.js"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"89501"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022e\u002B3WOBGu41M4xV8RnXdOHrppQHrbxNWXGwV5GNjfPo8=\u0022"},{"Name":"Last-Modified","Value":"Thu, 26 Feb 2026 14:24:03 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-\u002BddV4CkMvu4Qf7lxEjYuZWEDgx/9T0me0m7pd5mOn6g="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"9144"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022\u002BddV4CkMvu4Qf7lxEjYuZWEDgx/9T0me0m7pd5mOn6g=\u0022"},{"Name":"Last-Modified","Value":"Sat, 28 Feb 2026 15:42:07 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/FlynticStudio.Web/js/drone-studio.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\drone-studio.js'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-e\u002B3WOBGu41M4xV8RnXdOHrppQHrbxNWXGwV5GNjfPo8="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"89501"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022e\u002B3WOBGu41M4xV8RnXdOHrppQHrbxNWXGwV5GNjfPo8=\u0022"},{"Name":"Last-Modified","Value":"Thu, 26 Feb 2026 14:24:03 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-c30F/qbBD/9Kz8/A68p7LrTfYZEf9jc53YFSI34ugSw="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"93575"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022c30F/qbBD/9Kz8/A68p7LrTfYZEf9jc53YFSI34ugSw=\u0022"},{"Name":"Last-Modified","Value":"Sat, 28 Feb 2026 14:38:52 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/FlynticStudio.Web/js/drone-studio.zo76dtl0bq.js">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\drone-studio.js'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"zo76dtl0bq"},{"Name":"integrity","Value":"sha256-c30F/qbBD/9Kz8/A68p7LrTfYZEf9jc53YFSI34ugSw="},{"Name":"label","Value":"_content/FlynticStudio.Web/js/drone-studio.js"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"93575"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022c30F/qbBD/9Kz8/A68p7LrTfYZEf9jc53YFSI34ugSw=\u0022"},{"Name":"Last-Modified","Value":"Sat, 28 Feb 2026 14:38:52 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/FlynticStudio.Web/js/main.9mf9g4p094.js">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\main.js'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"9mf9g4p094"},{"Name":"integrity","Value":"sha256-rxiT5TjxU2DG9VgdYcpERfNtNKcNCZuPcxiDxfAOzjU="},{"Name":"label","Value":"_content/FlynticStudio.Web/js/main.js"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"10835"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022rxiT5TjxU2DG9VgdYcpERfNtNKcNCZuPcxiDxfAOzjU=\u0022"},{"Name":"Last-Modified","Value":"Sat, 28 Feb 2026 14:25:38 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/FlynticStudio.Web/js/main.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\main.js'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-twODonZdqd2dxg87gnLNTw\u002BRrbl4hXcMUS8FQs\u002BCdu4="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"10098"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022twODonZdqd2dxg87gnLNTw\u002BRrbl4hXcMUS8FQs\u002BCdu4=\u0022"},{"Name":"Last-Modified","Value":"Thu, 26 Feb 2026 16:28:36 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/FlynticStudio.Web/js/main.xm186zlj6y.js">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\main.js'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"xm186zlj6y"},{"Name":"integrity","Value":"sha256-twODonZdqd2dxg87gnLNTw\u002BRrbl4hXcMUS8FQs\u002BCdu4="},{"Name":"label","Value":"_content/FlynticStudio.Web/js/main.js"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"10098"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022twODonZdqd2dxg87gnLNTw\u002BRrbl4hXcMUS8FQs\u002BCdu4=\u0022"},{"Name":"Last-Modified","Value":"Thu, 26 Feb 2026 16:28:36 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-rxiT5TjxU2DG9VgdYcpERfNtNKcNCZuPcxiDxfAOzjU="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"10835"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022rxiT5TjxU2DG9VgdYcpERfNtNKcNCZuPcxiDxfAOzjU=\u0022"},{"Name":"Last-Modified","Value":"Sat, 28 Feb 2026 14:25:38 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/FlynticStudio.Web/js/threeScene.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\threeScene.js'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-If12RTkW6hOdZTHgesClcNOV4nNpJ4pYkmARnzmZ0\u002BM="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"17497"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022If12RTkW6hOdZTHgesClcNOV4nNpJ4pYkmARnzmZ0\u002BM=\u0022"},{"Name":"Last-Modified","Value":"Thu, 26 Feb 2026 16:22:34 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-mJQ11FvwzyZAa2Y3ZrFs3qWvkzTa79n1Pd86gVHY3Hg="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"29649"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022mJQ11FvwzyZAa2Y3ZrFs3qWvkzTa79n1Pd86gVHY3Hg=\u0022"},{"Name":"Last-Modified","Value":"Sat, 28 Feb 2026 14:26:25 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/FlynticStudio.Web/js/threeScene.nelii97le3.js">
+    <StaticWebAssetEndpoint Include="_content/FlynticStudio.Web/js/threeScene.kpkj5shqfv.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\threeScene.js'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"nelii97le3"},{"Name":"integrity","Value":"sha256-If12RTkW6hOdZTHgesClcNOV4nNpJ4pYkmARnzmZ0\u002BM="},{"Name":"label","Value":"_content/FlynticStudio.Web/js/threeScene.js"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"17497"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022If12RTkW6hOdZTHgesClcNOV4nNpJ4pYkmARnzmZ0\u002BM=\u0022"},{"Name":"Last-Modified","Value":"Thu, 26 Feb 2026 16:22:34 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"kpkj5shqfv"},{"Name":"integrity","Value":"sha256-mJQ11FvwzyZAa2Y3ZrFs3qWvkzTa79n1Pd86gVHY3Hg="},{"Name":"label","Value":"_content/FlynticStudio.Web/js/threeScene.js"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"29649"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022mJQ11FvwzyZAa2Y3ZrFs3qWvkzTa79n1Pd86gVHY3Hg=\u0022"},{"Name":"Last-Modified","Value":"Sat, 28 Feb 2026 14:26:25 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
   </ItemGroup>
 </Project>

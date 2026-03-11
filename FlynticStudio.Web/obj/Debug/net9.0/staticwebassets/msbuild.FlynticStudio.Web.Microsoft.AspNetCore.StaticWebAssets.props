@@ -12,8 +12,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>llyu7s9yz8</Fingerprint>
-      <Integrity>qXEyGeY2KpBkvrZcK4GrmmCwCr/Y1Kj+YMb885O1NHM=</Integrity>
+      <Fingerprint>tmlrogz35d</Fingerprint>
+      <Integrity>Re63/zTuWisKw6wZtonZfI5X9gSDwYg/0IPRfaeiC+8=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</OriginalItemSpec>
@@ -30,8 +30,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>nknci1pq77</Fingerprint>
-      <Integrity>qffga1kwBxGfv49mqRCkDfGB+egSVxl2JyfjXLts1sM=</Integrity>
+      <Fingerprint>1u0ztnr92i</Fingerprint>
+      <Integrity>+ddV4CkMvu4Qf7lxEjYuZWEDgx/9T0me0m7pd5mOn6g=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\dragInteraction.js'))</OriginalItemSpec>
@@ -48,8 +48,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>b46u3gpzr5</Fingerprint>
-      <Integrity>e+3WOBGu41M4xV8RnXdOHrppQHrbxNWXGwV5GNjfPo8=</Integrity>
+      <Fingerprint>zo76dtl0bq</Fingerprint>
+      <Integrity>c30F/qbBD/9Kz8/A68p7LrTfYZEf9jc53YFSI34ugSw=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\drone-studio.js'))</OriginalItemSpec>
@@ -66,8 +66,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>xm186zlj6y</Fingerprint>
-      <Integrity>twODonZdqd2dxg87gnLNTw+Rrbl4hXcMUS8FQs+Cdu4=</Integrity>
+      <Fingerprint>9mf9g4p094</Fingerprint>
+      <Integrity>rxiT5TjxU2DG9VgdYcpERfNtNKcNCZuPcxiDxfAOzjU=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\main.js'))</OriginalItemSpec>
@@ -84,8 +84,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>nelii97le3</Fingerprint>
-      <Integrity>If12RTkW6hOdZTHgesClcNOV4nNpJ4pYkmARnzmZ0+M=</Integrity>
+      <Fingerprint>kpkj5shqfv</Fingerprint>
+      <Integrity>mJQ11FvwzyZAa2Y3ZrFs3qWvkzTa79n1Pd86gVHY3Hg=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\threeScene.js'))</OriginalItemSpec>

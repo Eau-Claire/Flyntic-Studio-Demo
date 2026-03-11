@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Data/FlynticStudio.Data.csproj",
+      "projectUniqueName": "/home/minhchau/Documents/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Data/FlynticStudio.Data.csproj",
       "projectName": "FlynticStudio.Data",
-      "projectPath": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Data/FlynticStudio.Data.csproj",
+      "projectPath": "/home/minhchau/Documents/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Data/FlynticStudio.Data.csproj",
       "packagesPath": "/home/minhchau/.nuget/packages/",
-      "outputPath": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Data/obj/",
+      "outputPath": "/home/minhchau/Documents/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Data/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/minhchau/.nuget/NuGet/NuGet.Config"

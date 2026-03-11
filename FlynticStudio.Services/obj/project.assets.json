@@ -32,11 +32,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Services/FlynticStudio.Services.csproj",
+      "projectUniqueName": "/hdd/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Services/FlynticStudio.Services.csproj",
       "projectName": "FlynticStudio.Services",
-      "projectPath": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Services/FlynticStudio.Services.csproj",
+      "projectPath": "/hdd/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Services/FlynticStudio.Services.csproj",
       "packagesPath": "/home/minhchau/.nuget/packages/",
-      "outputPath": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Services/obj/",
+      "outputPath": "/hdd/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Services/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/minhchau/.nuget/NuGet/NuGet.Config"
@@ -52,8 +52,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Data/FlynticStudio.Data.csproj": {
-              "projectPath": "/home/minhchau/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Data/FlynticStudio.Data.csproj"
+            "/hdd/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Data/FlynticStudio.Data.csproj": {
+              "projectPath": "/hdd/Documents/Vscode/Projects/InSai/FlynticStudio/FlynticStudio.Data/FlynticStudio.Data.csproj"
             }
           }
         }
