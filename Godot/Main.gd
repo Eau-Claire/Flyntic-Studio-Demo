@@ -91,36 +91,44 @@ var COMPONENTS := {
 	"Motor 2205 2300KV": {
 		"type": "Motor", "weight": 35, "thrust": 850, "capacity": 0,
 		"color": Color(0.6, 0.25, 0.25),
+		"ground_offset": 0.3,
 		"ports": [{"name": "prop", "pos": Vector3(0, 0.5, 0), "slot": true, "allowed": ["Propeller"]}]
 	},
 	"Motor 2207 2400KV": {
 		"type": "Motor", "weight": 42, "thrust": 1100, "capacity": 0,
 		"color": Color(0.25, 0.45, 0.8),
+		"ground_offset": 0.3,
 		"ports": [{"name": "prop", "pos": Vector3(0, 0.5, 0), "slot": true, "allowed": ["Propeller"]}]
 	},
 	"Motor 2212 920KV": {
 		"type": "Motor", "weight": 56, "thrust": 980, "capacity": 0,
 		"color": Color(0.8, 0.55, 0.1),
+		"ground_offset": 0.3,
 		"ports": [{"name": "prop", "pos": Vector3(0, 0.5, 0), "slot": true, "allowed": ["Propeller"]}]
 	},
 	"Propeller 5045": {
 		"type": "Propeller", "weight": 8, "thrust": 0, "capacity": 0,
+		"ground_offset": 0.07,
 		"color": Color(0.8, 0.1, 0.1), "ports": []
 	},
 	"Propeller 6045": {
 		"type": "Propeller", "weight": 12, "thrust": 0, "capacity": 0,
+		"ground_offset": 0.07,
 		"color": Color(0.1, 0.1, 0.8), "ports": []
 	},
 	"Lipo 4S 1500mAh": {
 		"type": "Battery", "weight": 185, "thrust": 0, "capacity": 1500,
+		 "ground_offset": 0.1,
 		"color": Color(0.85, 0.7, 0.15), "ports": []
 	},
 	"F4 Flight Controller": {
 		"type": "FC", "weight": 7, "thrust": 0, "capacity": 0,
+		 "ground_offset": 0.1,
 		"color": Color(0.0, 0.35, 0.0), "ports": []
 	},
 	"4-in-1 ESC": {
 		"type": "ESC", "weight": 15, "thrust": 0, "capacity": 0,
+		 "ground_offset": 0.1,
 		"color": Color(0.0, 0.0, 0.5), "ports": []
 	},
 }
@@ -490,7 +498,9 @@ func _input(event):
 									var gp = Plane(Vector3.UP, 0)
 									var ghit = gp.intersects_ray(ro, rd)
 									if ghit:
-										_place(cur_id, ghit + Vector3(0, 0.5, 0))
+										#_place(cur_id, ghit + Vector3(0, 0.3, 0))
+										var offset_y = COMPONENTS[cur_id].get("ground_offset", 0.3)
+										_place(cur_id, ghit + Vector3(0, offset_y, 0))
 										_cancel_ghost()
 						elif in_canvas:
 							# Try to pick up existing component
@@ -691,7 +701,7 @@ func _ghost_tint(c: Color):
 # ──────────────────────────── PLACE & WIRE ────────────────────────
 func _place(id: String, pos: Vector3, port_name: String = "", parent_uid: int = -1):
 	var node = _build_mesh(id, false)
-	node.global_position = pos
+	#node.global_position = pos
 	
 	var uid = Time.get_ticks_msec() # Unique ID
 	var cdata = COMPONENTS[id]
@@ -710,6 +720,7 @@ func _place(id: String, pos: Vector3, port_name: String = "", parent_uid: int = 
 				break
 	else:
 		components_group.add_child(node)
+		node.global_position = pos
 
 	placed.append(entry)
 	_rebuild_wires()
@@ -1078,8 +1089,8 @@ func _on_play():
 					motor_with_prop_count += 1
 		
 		# Update UI state to "Locked"
-		comp_list.enabled = false
-		hier_tree.enabled = false
+		comp_list.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		hier_tree.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		hier_del_btn.disabled = true
 		for btn in toolbox_v.get_children():
 			if btn is Button: btn.disabled = true
@@ -1134,8 +1145,11 @@ func _on_stop():
 		_log("Bridge: Simulation stopped & reset", "info")
 	
 	# Unlock UI
-	comp_list.enabled = true
-	hier_tree.enabled = true
+	#comp_list.enabled = true
+	#hier_tree.enabled = true
+	comp_list.mouse_filter = Control.MOUSE_FILTER_STOP
+	hier_tree.mouse_filter = Control.MOUSE_FILTER_STOP
+
 	hier_del_btn.disabled = false
 	for btn in toolbox_v.get_children():
 		if btn is Button: btn.disabled = false
@@ -1402,30 +1416,77 @@ func _on_hier_item_selected():
 		_highlight_component(uid)
 		_log("Selected: " + item.get_text(0), "info")
 
+#func _highlight_component(uid: int):
+	#for c in placed:
+		#if c.uid == uid:
+			#
+			#var node = c.node
+			## Create a temporary pulse animation
+			#var tween = create_tween()
+			#var original_color = Color(1, 1, 1, 1) # Default
+			#
+			## Attempt to find meshes and pulse their emission
+			#for child in node.get_children():
+				#if child is MeshInstance3D:
+					#var mat = child.material_override
+					#if mat:
+						#original_color = mat.albedo_color
+						#tween.tween_property(mat, "emission_enabled", true, 0)
+						#tween.tween_property(mat, "emission", Color(0, 0.8, 1), 0.2)
+						#tween.tween_property(mat, "emission_energy_multiplier", 10.0, 0.2)
+						#tween.parallel().tween_property(child, "scale", Vector3(1.1, 1.1, 1.1), 0.2)
+						#tween.tween_property(mat, "emission_energy_multiplier", 0.0, 0.4)
+						#tween.parallel().tween_property(child, "scale", Vector3(1.0, 1.0, 1.0), 0.4)
+						#tween.tween_property(mat, "emission_enabled", false, 0)
+						## Ensure scale is reset to 1 after animation (in case tween is interrupted)
+						#tween.finished.connect(func(): child.scale = Vector3(1, 1, 1))
+			#return
 func _highlight_component(uid: int):
+	if uid == null or uid <= 0:
+		_log("Highlight failed: UID invalid", "error")
+		return
+	
+	_log("Trying to highlight UID: " + str(uid), "info")
+	
 	for c in placed:
 		if c.uid == uid:
-			var node = c.node
-			# Create a temporary pulse animation
-			var tween = create_tween()
-			var original_color = Color(1, 1, 1, 1) # Default
+			if not is_instance_valid(c.node):
+				_log("Highlight failed: Node is null", "error")
+				return
 			
-			# Attempt to find meshes and pulse their emission
+			var node = c.node
+			_log("Found component: " + c.id + " | Meshes found:", "info")
+			
+			var tween = create_tween()
+			var mesh_count = 0
+			
 			for child in node.get_children():
 				if child is MeshInstance3D:
+					mesh_count += 1
 					var mat = child.material_override
 					if mat:
-						original_color = mat.albedo_color
+						_log("  → Animating mesh: " + child.name, "success")
 						tween.tween_property(mat, "emission_enabled", true, 0)
 						tween.tween_property(mat, "emission", Color(0, 0.8, 1), 0.2)
 						tween.tween_property(mat, "emission_energy_multiplier", 10.0, 0.2)
-						tween.parallel().tween_property(child, "scale", Vector3(1.1, 1.1, 1.1), 0.2)
+						tween.tween_property(child, "scale", Vector3(1.1, 1.1, 1.1), 0.2)
 						tween.tween_property(mat, "emission_energy_multiplier", 0.0, 0.4)
-						tween.parallel().tween_property(child, "scale", Vector3(1.0, 1.0, 1.0), 0.4)
+						tween.tween_property(child, "scale", Vector3(1.0, 1.0, 1.0), 0.4)
 						tween.tween_property(mat, "emission_enabled", false, 0)
-						# Ensure scale is reset to 1 after animation (in case tween is interrupted)
-						tween.finished.connect(func(): child.scale = Vector3(1, 1, 1))
+			
+			if mesh_count == 0:
+				_log("No MeshInstance3D found at root level!", "warning")
+			
+			tween.finished.connect(func():
+				if is_instance_valid(node):
+					for ch in node.get_children():
+						if ch is MeshInstance3D:
+							ch.scale = Vector3.ONE
+			)
+			
 			return
+	
+	_log("Highlight failed: UID not found in placed", "error")
 
 func _remove_selected():
 	var item = hier_tree.get_selected()
