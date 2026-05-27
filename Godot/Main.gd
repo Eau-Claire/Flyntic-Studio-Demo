@@ -230,6 +230,8 @@ func _on_toolbox_input(event, node):
 
 		_create_block(type, label, color, get_global_mouse_position() - workspace.global_position + Vector2(10, 0))
 
+var _dragging_block: Panel = null
+
 func _create_block(type: String, text: String, color: Color, pos: Vector2):
 	var b = Panel.new()
 	b.set_script(block_script)
@@ -255,6 +257,8 @@ func _create_block(type: String, text: String, color: Color, pos: Vector2):
 		cutout.add_theme_stylebox_override("panel", csb)
 		cutout.position = Vector2(25, -1)
 		b.add_child(cutout)
+		cutout.z_index = 1
+
 
 	# Visual Connector: Bottom Notch (Same color)
 	var notch = Panel.new()
@@ -266,6 +270,9 @@ func _create_block(type: String, text: String, color: Color, pos: Vector2):
 	notch.add_theme_stylebox_override("panel", nsb)
 	notch.position = Vector2(25, 47)
 	b.add_child(notch)
+	notch.z_index = 5
+	
+	# ================== LABEL ==================
 	var block_label = Label.new()
 	block_label.name = "L"
 	block_label.text = text
@@ -276,6 +283,7 @@ func _create_block(type: String, text: String, color: Color, pos: Vector2):
 	b.add_child(block_label)
 
 	# Editable Input for specific blocks
+	
 	if type == "forward":
 		block_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 		block_label.position.x = 10
@@ -308,16 +316,58 @@ func _create_block(type: String, text: String, color: Color, pos: Vector2):
 		input.add_theme_stylebox_override("normal", empty_sb)
 		input.add_theme_stylebox_override("focus", empty_sb)
 		input_bg.add_child(input)
+	block_label.z_index = 3
+	# Nếu có input thì cũng đưa lên trên
+	if type == "forward":
+		var input_bg = b.get_node_or_null("input_bg")
+		if input_bg:
+			input_bg.z_index = 4
 
 	workspace.add_child(b)
 	b.position = pos
 	
-	b.drag_started.connect(func(): if is_instance_valid(trash_panel): trash_panel.visible = true)
-	b.drag_ended.connect(func(): 
-		if is_instance_valid(trash_panel): trash_panel.visible = false
+	b.drag_started.connect(func():
+		print("=== DRAG START === ", b.block_type)
+		_dragging_block = b 
+		if is_instance_valid(trash_panel):
+			trash_panel.visible = true
+		_apply_lift_effect(b, true)
+	)
+	b.drag_ended.connect(func():
+		_dragging_block = null 
+		if is_instance_valid(trash_panel):
+			trash_panel.visible = false
+		_apply_lift_effect(b, false)
 		_check_snapping(b)
 	)
 	return b
+# LIFTING EFFECT WHEN DRAGGING
+func _apply_lift_effect(block: Panel, lifting: bool):
+	if not is_instance_valid(block):
+		return
+	
+	var tween = create_tween()
+	tween.set_parallel(true)
+	
+	if lifting:
+		# Khi nhấc lên: to hơn, nghiêng, bóng mạnh hơn
+		tween.tween_property(block, "scale", Vector2(1.05, 1.05), 0.12)
+		tween.tween_property(block, "rotation_degrees", 3.0, 0.15)
+		
+		# Tăng shadow
+		var style = block.get_theme_stylebox("panel")
+		if style is StyleBoxFlat:
+			style.shadow_size = 8
+			style.shadow_offset = Vector2(0, 6)
+	else:
+		# Khi thả: về bình thường
+		tween.tween_property(block, "scale", Vector2(1.0, 1.0), 0.18)
+		tween.tween_property(block, "rotation_degrees", 0.0, 0.18)
+		
+		var style = block.get_theme_stylebox("panel")
+		if style is StyleBoxFlat:
+			style.shadow_size = 4
+			style.shadow_offset = Vector2(0, 4)
 
 func _create_trash_zone():
 	trash_panel = Panel.new()
@@ -341,50 +391,105 @@ func _create_trash_zone():
 	
 	toolbox.add_child(trash_panel)
 
+
+
+
+var snap_preview: Panel = null
 func _check_snapping(moving_block: Panel):
 	if not is_instance_valid(moving_block): return
 	if trash_panel: trash_panel.visible = false
+	
+	# Xóa preview cũ
+	if is_instance_valid(snap_preview):
+		snap_preview.queue_free()
+		snap_preview = null
+
 	var mpos = get_global_mouse_position()
 	
-	# 1. FIXED DELETION: Use the global rect of the toolbox panel
+	# 1. DELETE
 	if is_instance_valid(toolbox) and toolbox.get_global_rect().has_point(mpos):
 		moving_block.queue_free()
 		_log("Block deleted", "warning")
 		return
 
-	# 2. Preparation: Temporarily move to workspace for world-space calculation
+	# 2. Preparation
 	var old_pos = moving_block.global_position
 	if moving_block.get_parent() != workspace:
 		moving_block.get_parent().remove_child(moving_block)
 		workspace.add_child(moving_block)
 		moving_block.global_position = old_pos
 
-	# 3. FIXED SNAPPING: Scan ALL blocks, not just root children
+	# 3. TÌM BEST PARENT ĐỂ SNAP
 	var best_parent = null
-	var min_dist = 40.0 # Increased snap range
+	var min_dist = 40.0
+	var best_snap_pos = Vector2.ZERO
 	
 	var all_blocks = _get_all_blocks(workspace)
 	for other in all_blocks:
 		if not is_instance_valid(other): continue
 		if other == moving_block: continue
-		if other.is_ancestor_of(moving_block): continue # Don't snap to your own children
+		if other.is_ancestor_of(moving_block): continue
 		
 		var other_bottom_global = other.global_position + Vector2(0, other.size.y)
 		var d = moving_block.global_position.distance_to(other_bottom_global)
-		
-		# Also check horizontal alignment (Scratch-style)
 		var dx = abs(moving_block.global_position.x - other.global_position.x)
 		
 		if d < min_dist and dx < 50:
 			min_dist = d
 			best_parent = other
-	
+			best_snap_pos = other_bottom_global
+
+	# === GHOST PREVIEW (chỉ thêm phần này) ===
+	if best_parent:
+		snap_preview = Panel.new()
+		snap_preview.custom_minimum_size = moving_block.custom_minimum_size
+		snap_preview.modulate = Color(1, 1, 1, 0.3)   # Độ trong của ghost
+		snap_preview.position = best_snap_pos
+		workspace.add_child(snap_preview)
+		
+		var style = moving_block.get_theme_stylebox("panel").duplicate()
+		if style is StyleBoxFlat:
+			style.shadow_size = 0
+			style.bg_color.a = 0.25
+		snap_preview.add_theme_stylebox_override("panel", style)
+
+	# Thực hiện snap khi thả
+	#if best_parent and is_instance_valid(best_parent):
+		#
+		#workspace.remove_child(moving_block)
+		#best_parent.add_child(moving_block)
+		#
+		#var target_pos = Vector2(0, best_parent.size.y)
+		#moving_block.position = target_pos + Vector2(0, -15)
+#
+		#
+		#var tween = create_tween()
+		#tween.set_ease(Tween.EASE_OUT)
+		#tween.set_trans(Tween.TRANS_ELASTIC)
+		#tween.tween_property(moving_block, "position", target_pos, 0.4)
+		#_play_snap_sound()  # ← ĐÂY, sau tween, trước _log
+		#_log("Snapped to stack", "success")
 	if best_parent and is_instance_valid(best_parent):
-		# Hierarchy snap!
-		workspace.remove_child(moving_block)
-		best_parent.add_child(moving_block)
-		moving_block.position = Vector2(0, best_parent.size.y)
+		# Target = ngay bên dưới best_parent, cùng X
+		print("best_parent.position: ", best_parent.position)
+		print("best_parent.custom_minimum_size: ", best_parent.custom_minimum_size)
+		print("moving_block.custom_minimum_size: ", moving_block.custom_minimum_size)
+		var target_pos = best_parent.position + Vector2(0, best_parent.custom_minimum_size.y)
+		print("target_pos: ", target_pos)
+		
+		moving_block.z_index = best_parent.z_index + 1
+		moving_block.position = target_pos + Vector2(0, -20)
+		
+		var tween = create_tween()
+		tween.set_ease(Tween.EASE_OUT)
+		tween.set_trans(Tween.TRANS_ELASTIC)
+		tween.tween_property(moving_block, "position", target_pos, 0.4)
+		
+		_play_snap_sound()
 		_log("Snapped to stack", "success")
+
+
+
 
 # Helper to find all blocks regardless of nesting
 func _get_all_blocks(parent_node) -> Array:
@@ -576,6 +681,81 @@ func _process(_delta):
 		_move_ghost()
 	if sim_state == "playing":
 		_simulate(_delta)
+	_update_block_snap_preview()
+
+
+
+
+
+# Live preview khi đang kéo
+#func _start_live_preview(moving_block: Panel):
+	#if not is_instance_valid(moving_block):
+		#return
+	#
+	## Cập nhật preview mỗi frame khi kéo
+	#set_process(true)
+	#_update_snap_preview(moving_block)
+
+func _update_block_snap_preview():
+# Tìm block đang drag bằng cách scan tất cả blocks
+	var dragging_block = null
+	var all = _get_all_blocks(workspace)
+	for b in all:
+		if is_instance_valid(b) and "dragging" in b and b.dragging == true:
+			dragging_block = b
+			break
+	
+	if dragging_block == null:
+		_clear_preview()
+		snap_preview = null
+		return
+	
+	# Tìm best snap position
+	var best_snap_pos = Vector2.ZERO
+	var best_parent = null
+	var min_dist = 40.0
+
+	var all_blocks = _get_all_blocks(workspace)
+	for other in all_blocks:
+		if not is_instance_valid(other): continue
+		if other == dragging_block: continue
+		if other.is_ancestor_of(dragging_block): continue
+		var other_bottom = other.global_position + Vector2(0, other.size.y)
+		var d = dragging_block.global_position.distance_to(other_bottom)
+		var dx = abs(dragging_block.global_position.x - other.global_position.x)
+
+		if d < min_dist and dx < 50:
+			min_dist = d
+			best_parent = other
+			best_snap_pos = other_bottom
+
+	# Xóa preview cũ trước khi tạo mới
+	_clear_preview()
+
+	if best_parent:
+		snap_preview = Panel.new()
+		snap_preview.custom_minimum_size = dragging_block.custom_minimum_size
+		snap_preview.modulate = Color(1, 1, 1, 0.35)
+		# Dùng global_position thay vì position để chính xác hơn
+		snap_preview.set_position(best_snap_pos - workspace.global_position)
+		workspace.add_child(snap_preview)
+
+		var style = dragging_block.get_theme_stylebox("panel").duplicate()
+		if style != null:
+			var style_copy = style.duplicate()
+			if style_copy is StyleBoxFlat:
+				style_copy.shadow_size = 0
+				style_copy.bg_color.a = 0.25
+			snap_preview.add_theme_stylebox_override("panel", style_copy)
+
+
+func _clear_preview():
+	if is_instance_valid(snap_preview):
+		snap_preview.queue_free()
+		snap_preview = null
+
+
+
 
 # ──────────────────────────── GHOST / PLACEMENT ───────────────────
 func _on_item_selected(idx: int):
@@ -699,6 +879,8 @@ func _ghost_tint(c: Color):
 				sub.material_override.albedo_color = c
 
 # ──────────────────────────── PLACE & WIRE ────────────────────────
+var drone_root: Node3D = null
+
 func _place(id: String, pos: Vector3, port_name: String = "", parent_uid: int = -1):
 	var node = _build_mesh(id, false)
 	#node.global_position = pos
@@ -719,13 +901,28 @@ func _place(id: String, pos: Vector3, port_name: String = "", parent_uid: int = 
 				node.position = p.node.global_transform.affine_inverse() * pos
 				break
 	else:
-		components_group.add_child(node)
-		node.global_position = pos
+		#components_group.add_child(node)
+		#node.global_position = pos
+			   # Nếu là frame thì gắn vào drone_root
+		if cdata.type == "Frame":
+			if drone_root == null:
+				drone_root = Node3D.new()
+				drone_root.name = "DroneRoot"
+				components_group.add_child(drone_root)
+				wires_group.get_parent().remove_child(wires_group)
+				drone_root.add_child(wires_group)
+			drone_root.add_child(node)
+			node.global_position = pos
+		else:
+			# Component rời — gắn thẳng vào components_group
+			components_group.add_child(node)
+			node.global_position = pos
 
 	placed.append(entry)
 	_rebuild_wires()
 	_update_all()
 	_log("Assembled: " + id, "success")
+
 
 func _pick_existing():
 	var mpos = viewport.get_mouse_position()
@@ -1032,7 +1229,7 @@ func _on_play():
 		_log("SYSTEM ERROR: " + check.reason, "error")
 		sim_label.text = "ERROR"
 		return
-
+	_cancel_ghost()
 	# Start simulation state
 	sim_state = "playing"
 	sim_time = 0.0
@@ -1099,29 +1296,70 @@ func _on_play():
 		bridge.cmd_arm()
 		_log("Bridge: Drone configured (%.0fg, %d functional motors) & armed" % [tw, motor_with_prop_count], "info")
 
+#func _parse_block_stack(block):
+	#if not is_instance_valid(block): return
+	## Follow Godot hierarchy to find connected blocks
+	#for child in block.get_children():
+		#if is_instance_valid(child) and "block_type" in child:
+			#var val = 0.0
+			## STRICT search for Input field only within this block's immediate UI
+			#var input_node = child.get_node_or_null("input_bg/Input")
+				#
+			#if is_instance_valid(input_node) and input_node is LineEdit:
+				#val = input_node.text.to_float()
+				#if val <= 0.0: val = 50.0 # Default fallback
+			#
+			## Calculate duration based on distance to maintain constant speed
+			## Speed = 2.0 meters/sec (100 units/sec at 0.05 scale)
+			#var duration = max(1.0, (val * 0.05) / 2.0)
+			#
+			#sim_sequence.append({
+				#"type": child.block_type,
+				#"value": val,
+				#"duration": duration
+			#})
+			#_parse_block_stack(child)
 func _parse_block_stack(block):
 	if not is_instance_valid(block): return
-	# Follow Godot hierarchy to find connected blocks
-	for child in block.get_children():
-		if is_instance_valid(child) and "block_type" in child:
-			var val = 0.0
-			# STRICT search for Input field only within this block's immediate UI
-			var input_node = child.get_node_or_null("input_bg/Input")
-				
-			if is_instance_valid(input_node) and input_node is LineEdit:
-				val = input_node.text.to_float()
-				if val <= 0.0: val = 50.0 # Default fallback
-			
-			# Calculate duration based on distance to maintain constant speed
-			# Speed = 2.0 meters/sec (100 units/sec at 0.05 scale)
-			var duration = max(1.0, (val * 0.05) / 2.0)
-			
-			sim_sequence.append({
-				"type": child.block_type,
-				"value": val,
-				"duration": duration
-			})
-			_parse_block_stack(child)
+	
+	# Tìm block nào đang nằm ngay bên dưới block này (theo position)
+	var next_block = _find_block_below(block)
+	if next_block == null: return
+	
+	var val = 0.0
+	var input_node = next_block.get_node_or_null("input_bg/Input")
+	if is_instance_valid(input_node) and input_node is LineEdit:
+		val = input_node.text.to_float()
+		if val <= 0.0: val = 50.0
+	
+	var duration = max(1.0, (val * 0.05) / 2.0)
+	sim_sequence.append({
+		"type": next_block.block_type,
+		"value": val,
+		"duration": duration})
+	
+	# Tiếp tục tìm block tiếp theo bên dưới
+	_parse_block_stack(next_block)
+
+
+
+func _find_block_below(block: Panel) -> Panel:
+	if not is_instance_valid(block): return null
+	var threshold = 20.0  # Pixel tolerance
+	var expected_y = block.position.y + block.custom_minimum_size.y
+	var best: Panel = null
+	var best_dist = threshold 
+	for child in workspace.get_children():
+		if not is_instance_valid(child): continue
+		if child == block: continue
+		if not "block_type" in child: continue
+		if child.block_type == "start": continue        
+		var dy = abs(child.position.y - expected_y)
+		var dx = abs(child.position.x - block.position.x)      
+		if dy < best_dist and dx < 30.0:
+			best_dist = dy
+			best = child   
+	return best
 
 func _on_pause():
 	if sim_state == "playing":
@@ -1134,8 +1372,9 @@ func _on_stop():
 	sim_label.text = "Ready"
 	topbar_status.text = "stopped"
 	# Reset positions
-	components_group.rotation = Vector3.ZERO
-	components_group.position = Vector3.ZERO
+	if drone_root:
+		drone_root.rotation = Vector3.ZERO
+		drone_root.position = Vector3.ZERO
 	sim_step_idx = 0
 	# CRITICAL: Rebuild wires at home position to prevent "bulging"
 	_rebuild_wires()
@@ -1251,6 +1490,7 @@ func _on_bridge_state(state: Dictionary):
 		sim_label.text = status_text.capitalize()
 
 func _simulate_kinematic(delta: float, check: Dictionary):
+	if drone_root == null: return
 	"""Original kinematic simulation as fallback when bridge is not connected."""
 	# 2. Logic Step Processing
 	if sim_state == "playing" and sim_step_idx < sim_sequence.size():
@@ -1263,7 +1503,7 @@ func _simulate_kinematic(delta: float, check: Dictionary):
 			"forward":
 				# REAL MOVEMENT: Calculate target based on horizontal plane only
 				var target_dist = step.value * 0.05
-				var forward_dir = -components_group.global_transform.basis.z
+				var forward_dir = -drone_root.global_transform.basis.z
 				forward_dir.y = 0 # FORCED HORIZONTAL
 				forward_dir = forward_dir.normalized()
 				
@@ -1291,18 +1531,19 @@ func _simulate_kinematic(delta: float, check: Dictionary):
 	if check.capability == "Cannot fly":
 		final_target.y = 0.0
 	
-	components_group.position = components_group.position.lerp(final_target, 0.05)
+	drone_root.position = drone_root.position.lerp(final_target, 0.05)
 	
 	# DYNAMIC TILT: Drone must pitch DOWN to go forward
-	var displacement = (sim_target_pos - components_group.position)
+	var displacement = (sim_target_pos - drone_root.position)
 	var dynamic_pitch = clamp(displacement.z * 0.3, -0.3, 0.3)
 	var dynamic_roll = clamp(-displacement.x * 0.3, -0.3, 0.3)
 	
 	var tilt_x = check.tilt_x * 0.2 + dynamic_pitch + sin(sim_time*1.5)*0.01
 	var tilt_z = check.tilt_z * 0.2 + dynamic_roll + cos(sim_time*1.5)*0.01
 	
-	components_group.rotation.x = lerp(components_group.rotation.x, tilt_x, 0.1)
-	components_group.rotation.z = lerp(components_group.rotation.z, tilt_z, 0.1)
+	drone_root.rotation.x = lerp(drone_root.rotation.x, tilt_x, 0.1)  # ← ĐỔI
+	drone_root.rotation.z = lerp(drone_root.rotation.z, tilt_z, 0.1)
+
 
 func _preflight_check() -> Dictionary:
 	var motors_with_props = []
@@ -1560,3 +1801,24 @@ func _log(msg: String, type: String = "info"):
 		"warning": c = "#ff9800"
 	var t = Time.get_time_string_from_system()
 	log_box.append_text("[color=%s][%s] %s[/color]\n" % [c, t, msg])
+	
+func _play_snap_sound():
+	var player = AudioStreamPlayer.new()
+	add_child(player)
+	# Tạo click sound bằng code, không cần file
+	var gen = AudioStreamGenerator.new()
+	gen.mix_rate = 44100.0
+	gen.buffer_length = 0.1
+	player.stream = gen
+	player.play()
+	var pb = player.get_stream_playback()
+	# Generate click sound
+	var samples = 44100 * 0.05
+	for i in range(samples):
+		var t = float(i) / 44100.0
+		var amp = exp(-t * 80.0)  # Decay nhanh
+		var wave = sign(sin(2 * PI * 800 * t)) * amp * 0.3  # Square wave
+		pb.push_frame(Vector2(wave, wave))
+	# Tự xóa sau khi phát xong
+	await get_tree().create_timer(0.2).timeout
+	player.queue_free()
