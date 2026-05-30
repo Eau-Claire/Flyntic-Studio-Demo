@@ -56,7 +56,7 @@ const OBJ_SCALE := 0.01 # convert mm to Godot units
 var bridge: Node = null
 var bridge_connected := false
 var use_bridge_physics := true  # Set false to force kinematic fallback
-
+var wiring_panel: Control = null
 var CATEGORIES := {
 	"FRAME": ["PVC Pipe Frame", "Carbon Fiber Body"],
 	"MOTOR": ["Motor 2205 2300KV", "Motor 2207 2400KV", "Motor 2212 920KV"],
@@ -213,8 +213,9 @@ func _ready():
 	var w2d = load("res://Wiring.gd").new()
 	w2d.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	tabs.add_child(w2d)
+	wiring_panel = w2d
 	_create_hier_toggle()
-	#_setup_wiring_tab()
+	
 	_log("Flyntic Studio initialized", "success")
 
 
@@ -1578,6 +1579,15 @@ func _build_esc(root: Node3D):
 
 # ──────────────────────────── SIMULATION ──────────────────────────
 func _on_play():
+	# Kiem tra ket noi day trc khi play
+	if is_instance_valid(wiring_panel) and wiring_panel.has_method("is_wiring_complete"):
+		var wiring_check = wiring_panel.is_wiring_complete()
+		if not wiring_check.ok:
+			_log("SYSTEM ERROR: " + wiring_check.reason, "error")
+			sim_label.text = "ERROR"
+			topbar_status.text = "error"
+			tabs.current_tab = 2
+			return
 		# Check motor type trước
 	var motor_types := []
 	for c in placed:
@@ -2072,7 +2082,11 @@ func _update_diagnostics():
 		issues.append("[color=#f44336]✗ Mixed motor types detected — use identical motors[/color]")
 	if issues.size() == 0:
 		issues.append("[color=#4caf50]All systems nominal[/color]")
-
+		#kiem tra wiring 
+	#if is_instance_valid(wiring_panel) and wiring_panel.has_method("is_wiring_complete"):
+		#var wc = wiring_panel.is_wiring_complete()
+		#if not wc.ok:
+			#issues.append("[color=#f44336]✗ %s[/color]" % wc.reason)
 	diag_text.text = "\n".join(issues)
 
 # ──────────────────────────── UTILS ───────────────────────────────
@@ -2226,40 +2240,7 @@ func _cancel_wire_drag():
 		
 var wiring_overlay: Panel = null
 
-func _setup_wiring_tab():
-	# Không tạo tab mới — thay vào đó tạo overlay trên Canvas
-	var canvas_panel = tabs.get_child(0)  # Canvas tab
-	
-	wiring_overlay = Panel.new()
-	wiring_overlay.name = "WiringOverlay"
-	wiring_overlay.visible = false
-	wiring_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	wiring_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	
-	# Style overlay
-	var sb = StyleBoxFlat.new()
-	sb.bg_color = Color(0, 0, 0, 0)  # Transparent
-	sb.border_color = Color(0.1, 0.8, 0.9, 0.8)
-	sb.border_width_top = 2
-	wiring_overlay.add_theme_stylebox_override("panel", sb)
-	
-	# Label hướng dẫn ở góc trên
-	var hint_label = Label.new()
-	hint_label.name = "HintLabel"
-	hint_label.text = "⚡ WIRING MODE  |  Click Wiring tab cancel"
-	hint_label.add_theme_font_size_override("font_size", 12)
-	hint_label.add_theme_color_override("font_color", Color(0.1, 0.9, 0.9))
-	hint_label.position = Vector2(10, 8)
-	wiring_overlay.add_child(hint_label)
-	
-	canvas_panel.add_child(wiring_overlay)
-	
-	# Thêm tab Wiring thật sự — khi click sẽ switch về Canvas + bật mode
-	var wiring_tab_dummy = Control.new()
-	wiring_tab_dummy.name = "Wiring"
-	tabs.add_child(wiring_tab_dummy)
-	
-	tabs.tab_changed.connect(_on_tab_changed)
+
 
 
 var ignore_next_tab_change := false

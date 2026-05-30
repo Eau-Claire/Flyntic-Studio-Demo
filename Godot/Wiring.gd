@@ -954,3 +954,73 @@ func _get_selected_comp() -> Dictionary:
 		if comp.uid == selected_uid and comp.selected:
 			return comp
 	return {}
+
+func is_wiring_complete() -> Dictionary:
+	var result = {"ok": false, "reason": ""}
+	
+	# Kiểm tra có đủ components cần thiết không
+	var has_battery = false
+	var has_esc = false
+	var has_fc = false
+	var motor_count = 0
+	
+	for comp in canvas_components:
+		match comp.name:
+			"Battery": has_battery = true
+			"4-in-1 ESC": has_esc = true
+			"Flight Controller": has_fc = true
+			"Motor": motor_count += 1
+	
+	if not has_battery:
+		result.reason = "Wiring: No battery in circuit"
+		return result
+	if not has_esc:
+		result.reason = "Wiring: No ESC in circuit"
+		return result
+	if not has_fc:
+		result.reason = "Wiring: No Flight Controller in circuit"
+		return result
+	if motor_count == 0:
+		result.reason = "Wiring: No motors in circuit"
+		return result
+	
+	# Kiểm tra connections bắt buộc
+	var bat_to_esc = false      # Battery+ → ESC PWR+
+	var esc_to_fc = false       # ESC FC_BUS → FC ESC_BUS
+	var motors_connected = 0    # ESC M1-M4 → Motor PHASE
+	
+	for conn in connections:
+		if not conn.get("valid", false):
+			continue
+		
+		var fn = conn.from_comp.name
+		var tn = conn.to_comp.name
+		var fp = conn.from_port.name
+		var tp = conn.to_port.name
+		
+		# Battery → ESC power
+		if (fn == "Battery" and tn == "4-in-1 ESC") or (fn == "4-in-1 ESC" and tn == "Battery"):
+			if fp in ["BAT+","BAT-","PWR+","PWR-"] or tp in ["BAT+","BAT-","PWR+","PWR-"]:
+				bat_to_esc = true
+		
+		# ESC → FC signal
+		if (fn == "4-in-1 ESC" and tn == "Flight Controller") or (fn == "Flight Controller" and tn == "4-in-1 ESC"):
+			if fp in ["FC_BUS","ESC_BUS"] or tp in ["FC_BUS","ESC_BUS"]:
+				esc_to_fc = true
+		
+		# ESC → Motor
+		if (fn == "4-in-1 ESC" and tn == "Motor") or (fn == "Motor" and tn == "4-in-1 ESC"):
+			motors_connected += 1
+	
+	if not bat_to_esc:
+		result.reason = "Wiring: Battery not connected to ESC"
+		return result
+	if not esc_to_fc:
+		result.reason = "Wiring: ESC not connected to Flight Controller"
+		return result
+	if motors_connected < motor_count:
+		result.reason = "Wiring: %d/%d motors connected to ESC" % [motors_connected, motor_count]
+		return result
+	
+	result.ok = true
+	return result
