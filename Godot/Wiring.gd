@@ -548,6 +548,7 @@ func _draw_zoom_indicator():
 		HORIZONTAL_ALIGNMENT_LEFT, -1, 13,
 		Color(0.75, 0.75, 0.80, alpha))
 
+
 func _draw_component(comp: Dictionary):
 	var cv  = canvas
 	var pos = comp.pos
@@ -566,6 +567,7 @@ func _draw_component(comp: Dictionary):
 	cv.draw_rect(Rect2(local_pos, sz), col.darkened(0.52), true)
 	# Top accent
 	cv.draw_rect(Rect2(local_pos, Vector2(sz.x, 6)), col, true)
+
 	# Border — bright when selected
 	var bc = Color(1,1,1,0.9) if comp.selected else col.lightened(0.1)
 	var bw = 2.8 if comp.selected else 1.5
@@ -576,7 +578,11 @@ func _draw_component(comp: Dictionary):
 		cv.draw_rect(Rect2(local_pos - Vector2(3,3), sz + Vector2(6,6)),
 			Color(1,1,1,0.18), false, 1.0)
 
-
+	# NEW — chi tiết PCB riêng cho Flight Controller
+	if comp.name == "Flight Controller":
+		_draw_fc_details(cv, sz)
+	elif comp.name == "4-in-1 ESC":
+		_draw_esc_details(cv, sz)
 	# Ports (in local rotated space — shape only, no label)
 	for port in comp.ports:
 		_draw_port_local(cv, sz, port)
@@ -601,6 +607,59 @@ func _draw_component(comp: Dictionary):
 		int(11 * zoom_level), Color(0.95, 0.95, 0.95))
 
 
+func _draw_fc_details(cv: Control, sz: Vector2):
+	var half = sz * 0.5
+
+	# --- 4 lỗ bắt vít ở góc (chuẩn mounting FC) ---
+	var hole_pad = 14.0
+	var hole_r   = 4.0
+	var holes = [
+		Vector2(-half.x + hole_pad, -half.y + hole_pad),
+		Vector2( half.x - hole_pad, -half.y + hole_pad),
+		Vector2(-half.x + hole_pad,  half.y - hole_pad),
+		Vector2( half.x - hole_pad,  half.y - hole_pad),
+	]
+	for h in holes:
+		cv.draw_circle(h, hole_r + 1.5, Color(0.75, 0.76, 0.78, 0.9))  # viền kim loại
+		cv.draw_circle(h, hole_r, Color(0.05, 0.05, 0.05))            # lỗ đen
+
+	# --- Đường trace mờ nối chip ra các cạnh ---
+	var trace_col = Color(0.85, 0.85, 0.7, 0.25)
+	cv.draw_line(Vector2(-half.x + 20, 0), Vector2(-16, 0), trace_col, 1.2)
+	cv.draw_line(Vector2( half.x - 20, 0), Vector2( 16, 0), trace_col, 1.2)
+	cv.draw_line(Vector2(0, -half.y + 20), Vector2(0, -16), trace_col, 1.2)
+	cv.draw_line(Vector2(0,  half.y - 20), Vector2(0,  16), trace_col, 1.2)
+
+	# --- Chip trung tâm (MCU/Gyro) ---
+	var chip_size = Vector2(34, 34)
+	var chip_rect = Rect2(-chip_size * 0.5, chip_size)
+	cv.draw_rect(chip_rect, Color(0.03, 0.03, 0.03), true)
+	cv.draw_rect(chip_rect, Color(0.35, 0.35, 0.38), false, 1.2)
+
+	# Chân pin quanh chip
+	var pin_count = 5
+	for side in range(4):
+		for i in range(pin_count):
+			var t = (float(i) + 0.5) / pin_count
+			var pin_pos: Vector2
+			match side:
+				0: pin_pos = Vector2(lerp(-chip_size.x*0.5, chip_size.x*0.5, t), -chip_size.y*0.5 - 2)
+				1: pin_pos = Vector2(lerp(-chip_size.x*0.5, chip_size.x*0.5, t),  chip_size.y*0.5 + 2)
+				2: pin_pos = Vector2(-chip_size.x*0.5 - 2, lerp(-chip_size.y*0.5, chip_size.y*0.5, t))
+				_: pin_pos = Vector2( chip_size.x*0.5 + 2, lerp(-chip_size.y*0.5, chip_size.y*0.5, t))
+			cv.draw_rect(Rect2(pin_pos - Vector2(1.5,1.5), Vector2(3,3)), Color(0.7,0.7,0.72), true)
+
+	# Chấm nhỏ đánh dấu pin 1 (kiểu IC thật)
+	cv.draw_circle(chip_rect.position + Vector2(4,4), 1.6, Color(0.5,0.5,0.5))
+
+	# Chữ in trên chip
+	cv.draw_string(ThemeDB.fallback_font, Vector2(-11, 4), "FC",
+		HORIZONTAL_ALIGNMENT_LEFT, -1, 10, Color(0.5, 0.55, 0.6))
+
+	# --- Đèn LED trạng thái, có glow ---
+	var led_pos = Vector2(half.x - 10, -half.y + 10)
+	cv.draw_circle(led_pos, 5.0, Color(0.15, 0.85, 1.0, 0.25))  # glow
+	cv.draw_circle(led_pos, 3.0, Color(0.15, 0.85, 1.0, 0.95))  # lõi LED
 
 func _draw_motor(comp: Dictionary):
 	var cv  = canvas
@@ -1607,3 +1666,101 @@ func _find_port_by_name(comp: Dictionary, port_name: String) -> Dictionary:
 		if p.name == port_name:
 			return p
 	return {}
+func _draw_esc_details(cv: CanvasItem, sz: Vector2) -> void:
+	var w := sz.x
+	var h := sz.y
+	var l := -w * 0.5
+	var t := -h * 0.5
+
+	var gold      := Color(0.85, 0.68, 0.25)
+	var gold_dark := Color(0.55, 0.42, 0.12)
+	var chip_col  := Color(0.05, 0.05, 0.07)
+	var chip_edge := Color(0.25, 0.25, 0.28)
+	var silver    := Color(0.75, 0.75, 0.78)
+	var cap_col   := Color(0.12, 0.12, 0.14)
+	var silk      := Color(0.65, 0.68, 0.72, 0.85)
+
+	var min_side: float = minf(w, h)   # <-- minf() thay vì min()
+
+	# ---- 1. 4 lỗ ốc góc ----
+	var off := Vector2(w, h) * 0.12
+	var corners := [
+		{"pos": Vector2(l, t) + off,                        "label": "4"},
+		{"pos": Vector2(l + w, t) + Vector2(-off.x, off.y), "label": "2"},
+		{"pos": Vector2(l, t + h) + Vector2(off.x, -off.y), "label": "3"},
+		{"pos": Vector2(l + w, t + h) - off,                "label": "1"},
+	]
+	for c in corners:
+		var p: Vector2 = c.pos
+		var r: float = min_side * 0.085
+		cv.draw_circle(p, r, gold_dark)
+		cv.draw_circle(p, r * 0.62, Color(0, 0, 0, 0.55))
+		cv.draw_arc(p, r, 0, TAU, 24, gold, 2.0)
+		cv.draw_string(ThemeDB.fallback_font, p - Vector2(3, -3), c.label,
+			HORIZONTAL_ALIGNMENT_CENTER, -1, 10, Color(0.9, 0.9, 0.9, 0.8))
+
+	# ---- 2. Dãy pad vàng răng lược 2 bên ----
+	var scallop_r := h * 0.028
+	var scallop_count := 6
+	for side_x in [l, l + w]:
+		var y0 := t + h * 0.22
+		var y1 := t + h * 0.78
+		for i in range(scallop_count):
+			var ty: float = lerp(y0, y1, float(i) / float(scallop_count - 1))
+			cv.draw_circle(Vector2(side_x, ty), scallop_r, gold)
+			cv.draw_circle(Vector2(side_x, ty), scallop_r * 0.55, gold_dark)
+
+	# ---- 3. Cụm MOSFET đen dọc 2 bên ----
+	var mos_w := w * 0.16
+	var mos_h := h * 0.09
+	for side_sign: float in [-1.0, 1.0]:      # <-- type tường minh
+		var x: float = (w * 0.5 - mos_w * 0.65) * side_sign
+		for row in range(3):
+			var y: float = t + h * 0.30 + row * (mos_h * 1.35)
+			var rpos: Vector2 = Vector2(x - mos_w * 0.5, y)
+			cv.draw_rect(Rect2(rpos, Vector2(mos_w, mos_h)), chip_col, true)
+			cv.draw_rect(Rect2(rpos, Vector2(mos_w, mos_h)), chip_edge, false, 1.0)
+			for lead in range(3):
+				var lx: float = rpos.x + mos_w * (0.2 + 0.3 * lead)
+				cv.draw_line(Vector2(lx, rpos.y + mos_h), Vector2(lx, rpos.y + mos_h + 3), silver, 1.2)
+
+	# ---- 4. 2 IC trung tâm ----
+	var ic_w := w * 0.16
+	var ic_h := h * 0.16
+	var ic_y := t + h * 0.30
+	for dx: float in [-1.0, 1.0]:             # <-- type tường minh
+		var icx: float = dx * w * 0.11 - ic_w * 0.5
+		var rpos: Vector2 = Vector2(icx, ic_y)
+		cv.draw_rect(Rect2(rpos, Vector2(ic_w, ic_h)), chip_col, true)
+		cv.draw_rect(Rect2(rpos, Vector2(ic_w, ic_h)), chip_edge, false, 1.0)
+		cv.draw_circle(rpos + Vector2(4, 4), 1.6, silver)
+		for pin in range(5):
+			var py: float = rpos.y + ic_h * (0.15 + 0.7 * pin / 4.0)
+			cv.draw_line(Vector2(rpos.x, py), Vector2(rpos.x - 3, py), silver, 1.0)
+			cv.draw_line(Vector2(rpos.x + ic_w, py), Vector2(rpos.x + ic_w + 3, py), silver, 1.0)
+
+	# ---- 5. Dãy chấm tín hiệu giữa 2 IC ----
+	var dot_y0 := ic_y + ic_h * 0.15
+	var dot_y1 := ic_y + ic_h * 0.85
+	for i in range(6):
+		var dy: float = lerp(dot_y0, dot_y1, float(i) / 5.0)
+		cv.draw_circle(Vector2(0.0, dy), 1.8, silver)
+
+	# ---- 6. Tụ điện nhỏ 4 góc trong ----
+	var cap_positions := [
+		Vector2(l + w * 0.28, t + h * 0.14),
+		Vector2(l + w * 0.72, t + h * 0.14),
+		Vector2(l + w * 0.28, t + h * 0.88),
+		Vector2(l + w * 0.72, t + h * 0.88),
+	]
+	for cp in cap_positions:
+		var cr: float = min_side * 0.03
+		cv.draw_circle(cp, cr, cap_col)
+		cv.draw_arc(cp, cr, 0, TAU, 16, Color(0.4, 0.4, 0.42), 1.0)
+
+	# ---- 7. Nhãn silkscreen ----
+	var labels := ["GND", "VCC", "BAT", "CURR"]
+	for i in range(labels.size()):
+		var lx: float = lerp(l + w * 0.18, l + w * 0.82, float(i) / 3.0)
+		cv.draw_string(ThemeDB.fallback_font, Vector2(lx, t + h * 0.09), labels[i],
+			HORIZONTAL_ALIGNMENT_CENTER, -1, 8, silk)
